@@ -11,7 +11,7 @@
 </script>
 
 <style lang="scss">
-//@import "~@/assets/style/reset.scss";
+@import "~@/assets/style/reset.scss";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
