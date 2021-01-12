@@ -22,8 +22,10 @@ name: "Nav"
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
 nav {
   display: flex;
+  @extend %outerShadow;
   > .item {
     padding: 2px 0;
     width: 33.3333333%;
