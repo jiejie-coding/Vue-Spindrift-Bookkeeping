@@ -1,26 +1,40 @@
 <template>
   <Layout class-prefix="layout">
-    <Types/>
-    <Tags :data-source.sync="tags"/>
-    <Notes/>
-    <NumberPad/>
+    <Types :value.sync="record.types"/>
+    <Tags :data-source.sync="tags" @update:value='onUpdateTags'/>
+    <Notes @update:value="onUpdateNotes"/>
+    <NumberPad :value.sync="record.amount"/>
+    {{record}}
   </Layout>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import Types from '@/components/money/Types.vue';
 import Tags from '@/components/money/Tags.vue';
 import Notes from '@/components/money/Notes.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
-export default {
-  name: 'Money',
+import {Component} from 'vue-property-decorator';
+
+type Record = {
+  tags: string[];
+  types: string;
+  notes: string;
+  amount: number;
+}
+@Component({
   components: {NumberPad, Notes, Tags, Types},
-  data() {
-    return {
-      tags: ["衣","食","住","行"]
-    }
+})
+export default class Money extends Vue{
+  tags: string[] = ["衣","食","住","行"]
+  record: Record = {tags:[], notes:'', amount: 0, types: '-'}
+  onUpdateTags(value: string[]) {
+    this.record.tags = value;
   }
-};
+  onUpdateNotes(value: string) {
+    this.record.notes = value;
+  }
+}
 </script>
 
 <style lang="scss">
@@ -28,7 +42,4 @@ export default {
   display: flex;
   flex-direction: column;
 }
-</style>
-<style lang="scss" scoped>
-
 </style>
