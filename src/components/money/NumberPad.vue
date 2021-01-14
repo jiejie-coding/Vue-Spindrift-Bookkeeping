@@ -76,7 +76,7 @@
   .buttons {
     @extend %clearFix;
     > button {
-      border: 1px solid #777;
+      border: 0.5px solid #777;
       width: 25%;
       height: 48px;
       float: left;

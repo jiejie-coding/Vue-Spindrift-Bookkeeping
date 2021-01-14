@@ -4,7 +4,6 @@
     <Tags :data-source.sync="tags" @update:value='onUpdateTags'/>
     <Notes @update:value="onUpdateNotes"/>
     <NumberPad :value.sync="record.amount"  @submit="saveRecord"/>
-    {{recordList}}
   </Layout>
 </template>
 
@@ -48,8 +47,8 @@ export default class Money extends Vue{
 </script>
 
 <style lang="scss">
-.layout-content {
-  display: flex;
-  flex-direction: column;
-}
+  .layout-content {
+    display: flex;
+    flex-direction: column;
+  }
 </style>

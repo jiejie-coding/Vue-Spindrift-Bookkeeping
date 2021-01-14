@@ -30,25 +30,27 @@
   background: $color-base;
   text-align: center;
   display: flex;
-  font-size: 24px;
+  font-size: 16px;
   color: #fff;
+  padding: 10px 20%;
+
   > li {
     width: 50%;
-    height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 0.5px solid #ffffff;
+    margin-top: 20px;
+    line-height: 30px;
+    &:first-child {
+      border-radius: 8px 0 0 8px;
+    }
+    &:nth-child(2) {
+      border-radius: 0 8px 8px 0;
+    }
     &.selected {
-      position: relative;
-      &::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 3px;
-        left: 0;
-        bottom: 0;
-        background-color: #333;
-      }
+      color: $color-base;
+      background-color: #fff;
     }
   }
 }
