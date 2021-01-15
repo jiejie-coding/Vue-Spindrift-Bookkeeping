@@ -2,11 +2,20 @@
   <div class="tags">
     <ul class="current">
       <li v-for="tag in dataSource">
-        <span @click="toggle(tag)" :class="{'selected': selectedTags.indexOf(tag) >= 0}">
-          {{tag}}
-        </span>
+        <div @click="selects(tag)" class="item-wrapper">
+          <div :class="{'selected': selectedTags === tag}" class="icon-wrapper">
+            <Icons :name="tag.name"/>
+          </div>
+          {{tag.value}}
+        </div>
       </li>
-      <li><span @click="create">新增</span>
+      <li>
+        <div @click="create" class="item-wrapper">
+          <div class="icon-wrapper">
+            <Icons name="define"/>
+          </div>
+          新增
+        </div>
       </li>
     </ul>
   </div>
@@ -15,27 +24,21 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-
 @Component
 export default class Tags extends Vue{
-  @Prop() dataSource: string[] | undefined;
-  selectedTags: string[] = [];
-  toggle(tag: string) {
-    const index = this.selectedTags.indexOf(tag);
-    if(index >= 0) {
-      this.selectedTags.splice(index,1);
-    } else {
-      this.selectedTags.push(tag);
-    }
+  @Prop() dataSource!: Record<string, any>[];
+  selectedTags = this.dataSource && this.dataSource[0];
+  selects(tag: Record<string, any>) {
+    this.selectedTags = tag;
     this.$emit('update:value',this.selectedTags);
   }
   create() {
-    const name = window.prompt("请输入标签名");
-    if(name === '') {
-      window.alert('标签名不为空');
-    } else if(this.dataSource) {
-        this.$emit('update:dataSource',[...this.dataSource,name]);
-    }
+    // const name = window.prompt("请输入标签名");
+    // if(name === '') {
+    //   window.alert('标签名不为空');
+    // } else if(this.dataSource) {
+    //     this.$emit('update:dataSource',[...this.dataSource,name]);
+    // }
   }
 }
 </script>
@@ -46,30 +49,40 @@ export default class Tags extends Vue{
   flex-direction: column;
   flex-grow: 1;
   font-size: 14px;
+  padding: 0 16px;
   overflow: auto;
   > .current {
     display: flex;
     flex-wrap: wrap;
     > li {
-      width: 25%;
-      text-align: center;
-      margin: 20px 0;
-      > span {
-        $bg: #d9d9d9;
-        display: inline-block;
-        background: $bg;
-        $h:24px;
-        line-height: $h;
-        height: $h;
-        border-radius: $h/2;
-        padding: 0 16px;
-        &.selected {
-          background-color: darken($bg, 20%);
-          color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 20%;
+      margin-top: 20px;
+      > .item-wrapper {
+        text-align: center;
+        > .icon-wrapper {
+          width: 50px;
+          height: 50px;
+          background-color: #f5f5f5;
+          border-radius: 50px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          &.selected {
+            background-color: #e3e3e3;
+          }
         }
       }
     }
   }
-
+  .icon {
+    width: 32px;
+    height: 32px;
+    display: block;
+  }
 }
 </style>

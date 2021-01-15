@@ -1,7 +1,7 @@
 <template>
   <div>
     <label class="notes">
-      <span class="name">备注{{value}}</span>
+      <span class="name"><Icons name="notes"/>{{value}}</span>
       <input type="text" v-model="value" placeholder="请输入备注"/>
     </label>
   </div>
@@ -36,6 +36,11 @@ export default class Notes extends Vue{
     flex-grow: 1;
     border: none;
     background: transparent;
+  }
+  .icon {
+    width: 25px;
+    height: 25px;
+    margin-top: 3px;
   }
 }
 </style>

@@ -1,9 +1,10 @@
 <template>
   <Layout class-prefix="layout">
     <Types :value.sync="record.types"/>
-    <Tags :data-source.sync="tags" @update:value='onUpdateTags'/>
+    <Tags :data-source="Tags" @update:value='onUpdateTags'/>
     <Notes @update:value="onUpdateNotes"/>
     <NumberPad :value.sync="record.amount"  @submit="saveRecord"/>
+    {{recordList}}
   </Layout>
 </template>
 
@@ -16,7 +17,7 @@ import NumberPad from '@/components/money/NumberPad.vue';
 import {Component, Watch} from 'vue-property-decorator';
 
 type Record = {
-  tags: string[];
+  tags: Record<string, any>;
   types: string;
   notes: string;
   amount: number;
@@ -25,10 +26,14 @@ type Record = {
   components: {NumberPad, Notes, Tags, Types},
 })
 export default class Money extends Vue{
-  tags: string[] = ["衣","食","住","行"]
-  record: Record = {tags:[], notes:'', amount: 0, types: '-'}
+  Tags: Record<string, any>[] = [{name:"icon1-3",value:'衣服'},{name:"icon1-4",value:'餐饮'},
+    {name:"icon1-5",value:'住房'},{name:"icon1-1",value:'交通'},{name:"icon1-8",value:'旅行'},{name:"icon1-2",value:'医疗'},
+    {name:"icon1-7",value:'美容'},{name:"icon1-9",value:'通讯'},{name:"icon1-10",value:'休闲'},
+    {name:"icon1-12",value:'知识'},
+    {name:"icon1-11",value:'水果'},];
+  record: Record = {tags:{name:"icon1-1",value:'衣服'}, notes:'', amount: 0, types: '-'}
   recordList: Record[] = JSON.parse(localStorage.getItem('recordList') || '[]');
-  onUpdateTags(value: string[]) {
+  onUpdateTags(value: Record<string, any>) {
     this.record.tags = value;
   }
   onUpdateNotes(value: string) {
@@ -36,6 +41,7 @@ export default class Money extends Vue{
   }
   saveRecord(){
     const record1 = JSON.parse(JSON.stringify(this.record));
+    console.log(record1);
     this.recordList.push(record1);
     console.log(this.recordList);
   }

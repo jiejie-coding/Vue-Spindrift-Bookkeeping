@@ -1,6 +1,11 @@
 <template>
   <div class="numberPad">
-    <div class="output">{{output}}</div>
+    <div class="output">
+      <div class="times">
+        <Icons name="times"/>
+      </div>
+      ￥{{output}}
+    </div>
     <div class="buttons" @click="inputContent">
       <button>1</button>
       <button>2</button>
@@ -30,7 +35,7 @@
     inputContent(event: MouseEvent) {
       const button = (event.target as HTMLButtonElement);
       const input = button.textContent as string;
-      if(this.output.length === 16) { return }
+      if(this.output.length === 9) { return }
       if(this.output === '0') {
         if('0123456789'.indexOf(input) >= 0){
           this.output = input;
@@ -54,6 +59,10 @@
     }
 
     ok() {
+      if (parseFloat(this.output) === 0) {
+        alert("金额不能为0哦~")
+        return ;
+      }
       this.$emit('update:value',this.output);
       this.$emit('submit',this.output);
       this.output = '0';
@@ -72,6 +81,9 @@
     padding: 9px 16px;
     text-align: right;
     height: 72px;
+    .times {
+      float: left;
+    }
   }
   .buttons {
     @extend %clearFix;
@@ -92,8 +104,10 @@
 
   }
   .icon {
-    width: 20px;
-    height: 20px;
+    margin-bottom: 8px;
+    width: 25px;
+    height: 25px;
+
   }
 }
 </style>

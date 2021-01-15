@@ -20,7 +20,6 @@
       }
       this.$emit('update:value',type);
     }
-
   }
 </script>
 
