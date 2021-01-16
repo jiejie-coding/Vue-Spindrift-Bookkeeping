@@ -4,7 +4,7 @@
     <Tags :data-source="Tags" @update:value='onUpdateTags'/>
     <Notes @update:value="onUpdateNotes"/>
     <NumberPad :value.sync="record.amount"  @submit="saveRecord"/>
-    {{recordList}}
+<!--    {{recordList}}-->
   </Layout>
 </template>
 
@@ -15,7 +15,7 @@ import Tags from '@/components/money/Tags.vue';
 import Notes from '@/components/money/Notes.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
 import {Component, Watch} from 'vue-property-decorator';
-import model from '@/model.ts'
+import model from '@/model/recordListModel'
 
 const recordLists = model.fetch();
 

@@ -19,17 +19,23 @@
         <Icons name="delete"/>
       </li>
     </ul>
-    <button class="add">
-      <icons name="define"/>
-    </button>
+    <router-link to="/labels/newTag">
+      <button class="add" @click="createTag">
+        <icons name="define"/>
+      </button>
+    </router-link>
   </Layout>
 </template>
 
 <script lang="ts">
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
 import Types from '@/components/money/Types.vue';
-export default {
-  name: "Labels",
+@Component({
   components: {Types},
+})
+export default class Labels extends Vue{
+
 }
 </script>
 
