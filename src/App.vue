@@ -18,6 +18,7 @@ body {
   font-family: $font-hei;
   font-size: 16px;
   color: #333;
+  background-color: #fdfdfd;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
