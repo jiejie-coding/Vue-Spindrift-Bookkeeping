@@ -7,11 +7,13 @@
           <Icons :name="tag.name"/>
           {{tag.value}}
         </span>
-        <Icons name="delete"/>
+        <span @click="deleteTag(tag)">
+          <Icons name="delete"/>
+        </span>
       </li>
     </ul>
     <router-link to="/labels/newTag">
-      <button class="add" @click="createTag">
+      <button class="add">
         <icons name="define"/>
       </button>
     </router-link>
@@ -30,9 +32,12 @@ tagListModel.fetch();
   components: {Types},
 })
 export default class Labels extends Vue{
+
   tags = tagListModel.data;
-  createTag() {
-    console.log(11);
+
+  deleteTag(name: object) {
+    tagListModel.remove(name);
+    this.tags = tagListModel.data;
   }
 }
 </script>

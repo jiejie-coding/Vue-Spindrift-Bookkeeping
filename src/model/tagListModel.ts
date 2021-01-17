@@ -4,6 +4,7 @@ type TagListModel = {
   fetch: () => object | object[];
   create: (name: object) => object;
   save: () => void;
+  remove: (name: object) => void;
 }
 const tagListModel: TagListModel = {
   data: [{name:"icon1-3",value:'衣服'},{name:"icon1-4",value:'餐饮'},
@@ -26,7 +27,14 @@ const tagListModel: TagListModel = {
   save() {
     window.localStorage.setItem(localStorageKeyName,JSON.stringify(this.data));
   },
-
+  remove(name: object) {
+    this.data = this.data.filter(key => {
+      // @ts-ignore
+      return key != name;
+    })
+    this.save();
+    console.log(this.data);
+  }
 }
 
 export default tagListModel;

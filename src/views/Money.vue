@@ -27,6 +27,10 @@ const tagList = tagListModel.fetch();
 export default class Money extends Vue{
   Tags: object[] | object = tagList;
 
+  created() {
+    this.Tags = tagListModel.fetch();
+    console.log(111);
+  }
   record: recordItem = {tags:{name:"icon1-1",value:'衣服'}, notes:'', amount: 0, types: '-'}
   recordList: recordItem[] = recordLists;
 
@@ -43,6 +47,7 @@ export default class Money extends Vue{
   onRecordListChanged() {
     recordListModel.save(this.recordList);
   }
+
 }
 </script>
 
