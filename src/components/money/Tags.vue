@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li v-for="tag in dataSource">
+      <li v-for="tag in dataSource" :key="tag.name">
         <div @click="selects(tag)" class="item-wrapper">
           <div :class="{'selected': selectedTags === tag}" class="icon-wrapper">
             <Icons :name="tag.name"/>
@@ -44,6 +44,7 @@ export default class Tags extends Vue{
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/style/helper.scss';
 .tags {
   display: flex;
   flex-direction: column;
@@ -73,7 +74,10 @@ export default class Tags extends Vue{
           justify-content: center;
           align-items: center;
           &.selected {
+            @extend %outerShadow;
+
             background-color: #e3e3e3;
+
           }
         }
       }
