@@ -75,7 +75,6 @@ export default class Tags extends Vue{
           align-items: center;
           &.selected {
             @extend %outerShadow;
-
             background-color: #e3e3e3;
 
           }
