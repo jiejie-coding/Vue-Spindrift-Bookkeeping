@@ -15,35 +15,33 @@ import Tags from '@/components/money/Tags.vue';
 import Notes from '@/components/money/Notes.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
 import {Component, Watch} from 'vue-property-decorator';
-import model from '@/model/recordListModel'
+import recordListModel from '@/model/recordListModel'
+import tagListModel from '@/model/tagListModel';
 
-const recordLists = model.fetch();
+const recordLists = recordListModel.fetch();
+const tagList = tagListModel.fetch();
 
 @Component({
   components: {NumberPad, Notes, Tags, Types},
 })
 export default class Money extends Vue{
-  Tags: Record<string, any>[] = [{name:"icon1-3",value:'衣服'},{name:"icon1-4",value:'餐饮'},
-    {name:"icon1-5",value:'住房'},{name:"icon1-1",value:'交通'},{name:"icon1-8",value:'旅行'},{name:"icon1-2",value:'医疗'},
-    {name:"icon1-7",value:'美容'},{name:"icon1-9",value:'通讯'},{name:"icon1-10",value:'休闲'},
-    {name:"icon1-12",value:'知识'},
-    {name:"icon1-11",value:'水果'},];
+  Tags: object[] | object = tagList;
 
   record: recordItem = {tags:{name:"icon1-1",value:'衣服'}, notes:'', amount: 0, types: '-'}
   recordList: recordItem[] = recordLists;
 
-  onUpdateTags(value: Record<string, any>) {
+  onUpdateTags(value: object) {
     this.record.tags = value;
   }
   onUpdateNotes(value: string) {
     this.record.notes = value;
   }
   saveRecord(){
-    this.recordList.push(model.clone(this.record));
+    this.recordList.push(recordListModel.clone(this.record));
   }
   @Watch('recordList')
   onRecordListChanged() {
-    model.save(this.recordList);
+    recordListModel.save(this.recordList);
   }
 }
 </script>
