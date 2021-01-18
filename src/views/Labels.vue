@@ -1,9 +1,6 @@
 <template>
   <div class="labels">
-    <Types :value.sync="types">
-        <div slot="left" @click="goBack"><Icons name="return"/></div>
-        <div slot="right" class="right">保存</div>
-    </Types>
+    <LabelNav/>
     <ul class="tags">
       <li v-for="tag in tags">
         <span>
@@ -30,11 +27,12 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Types from '@/components/nav/MoneyNav.vue';
 import tagListModel from '@/model/tagListModel';
+import LabelNav from '@/components/nav/LabelNav.vue';
 
 tagListModel.fetch();
 
 @Component({
-  components: {Types},
+  components: {LabelNav, Types},
 })
 export default class Labels extends Vue{
   types = '-';
@@ -44,11 +42,7 @@ export default class Labels extends Vue{
     tagListModel.remove(name);
     this.tags = tagListModel.data;
   }
-  goBack() {
-    this.$router.replace({
-      path:'/money'
-    })
-  }
+
 }
 </script>
 

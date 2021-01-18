@@ -1,31 +1,25 @@
 <template>
-  <Nav>
-<!--    <div slot="left"></div>-->
-    <div slot="center">
-      <Types/>
-    </div>
-<!--    <div slot="right"></div>-->
-  </Nav>
+  <ul class="types">
+    <li :class="value === '-' && 'selected'" @click="selectType('-')">支出</li>
+    <li :class="value === '+' && 'selected'" @click="selectType('+')">收入</li>
+  </ul>
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'
-  import {Component, Prop} from 'vue-property-decorator';
-  import Nav from '@/components/nav/Nav.vue';
-  import Types from '@/components/Types.vue';
-  @Component({
-    components: {Types, Nav}
-  })
-  export default class MoneyNav extends Vue {
-    @Prop() readonly value!: string;
+import Vue from 'vue'
+import {Component, Prop} from 'vue-property-decorator';
 
-    selectType(type: string) {
-      if(type !== '+' && type !== '-') {
-        console.log(new Error('Type is wrong'));
-      }
-      this.$emit('update:value',type);
+@Component
+export default class Types extends Vue {
+  @Prop() readonly value: string = '-';
+
+  selectType(type: string) {
+    if(type !== '+' && type !== '-') {
+      console.log(new Error('Type is wrong'));
     }
+    this.$emit('update:value',type);
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -37,7 +31,6 @@
   font-size: 16px;
   color: #fff;
   padding: 10px 20%;
-
   > li {
     width: 50%;
     display: flex;

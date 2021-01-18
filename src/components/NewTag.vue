@@ -1,10 +1,6 @@
 <template>
   <div class="newTag">
-    <Nav>
-      <div slot="left" @click="goBack"><Icons name="return"/></div>
-      <div class="title" slot="center">新增支出标签</div>
-      <div slot="right" class="save" @click="save">保存</div>
-    </Nav>
+    <ItemNav/>
     <div class="input">
       <div class="input-text">
         <span>名称</span>
@@ -22,11 +18,12 @@ import Tags from '@/components/money/Tags.vue';
 import Nav from '@/components/nav/Nav.vue';
 import {Component} from 'vue-property-decorator';
 import tagListModel from '@/model/tagListModel';
+import ItemNav from '@/components/nav/ItemNav.vue';
 
 
 
 @Component({
-  components:{Tags,Nav}
+  components:{ItemNav, Tags,Nav}
 })
 
 export default class NewTag extends Vue{
@@ -48,25 +45,12 @@ export default class NewTag extends Vue{
       this.value = '';
     }
   }
-  goBack() {
-    this.$router.replace({
-      path:'/labels'
-    })
-  }
 }
 </script>
 
 
 <style lang="scss" scoped>
 @import '~@/assets/style/helper.scss';
-  .title {
-    //border: 1px solid red;
-    position: relative;
-    font-size: 18px;
-    height: 64px;
-    line-height: 64px;
-    text-align: center;
-  }
   .input {
     padding: 0 40px;
     font-size: 18px;
@@ -84,8 +68,5 @@ export default class NewTag extends Vue{
         border-bottom: 1px solid #777777;
       }
     }
-  }
-  .save {
-    line-height: 64px;
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <div class="nav" :class="classPrefix && `${classPrefix}-content`">
     <slot name="left"></slot>
     <slot name="center"></slot>
     <slot name="right"></slot>
@@ -8,29 +8,19 @@
 
 
 <script lang="ts">
-export default {
-name: "Nav"
+import Vue from 'vue';
+import {Component, Prop} from 'vue-property-decorator';
+
+@Component
+export default class Nav extends Vue{
+  @Prop() classPrefix!: string;
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/style/helper.scss';
-  .nav {
-    display: flex;
-    background-color: $color-base;
-    font-size: 16px;
-    color: white;
-    padding: 0 15px;
-    > :first-child,
-    > :nth-child(3) {
-      > :first-child {
-        text-align: center;
-        width: 32px;
-        margin-top: 30px;
-      }
-    }
-    > :nth-child(2) {
-      flex-grow: 1;
-    }
-  }
+@import "~@/assets/style/helper.scss";
+.nav {
+  background-color: $color-base;
+  color: white;
+}
 </style>
