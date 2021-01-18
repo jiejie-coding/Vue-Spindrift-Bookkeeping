@@ -1,8 +1,11 @@
 <template>
-  <Layout class-prefix="tags">
-    <Types/>
-    <ul class="tags" v-for="tag in tags">
-      <li>
+  <div class="labels">
+    <Types :value.sync="types">
+        <div slot="left" @click="goBack"><Icons name="return"/></div>
+        <div slot="right" class="right">保存</div>
+    </Types>
+    <ul class="tags">
+      <li v-for="tag in tags">
         <span>
           <Icons :name="tag.name"/>
           {{tag.value}}
@@ -12,18 +15,20 @@
         </span>
       </li>
     </ul>
+
     <router-link to="/labels/newTag">
       <button class="add">
         <icons name="define"/>
       </button>
     </router-link>
-  </Layout>
+  </div>
+
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import Types from '@/components/money/Types.vue';
+import Types from '@/components/nav/MoneyNav.vue';
 import tagListModel from '@/model/tagListModel';
 
 tagListModel.fetch();
@@ -32,12 +37,17 @@ tagListModel.fetch();
   components: {Types},
 })
 export default class Labels extends Vue{
-
+  types = '-';
   tags = tagListModel.data;
 
   deleteTag(name: object) {
     tagListModel.remove(name);
     this.tags = tagListModel.data;
+  }
+  goBack() {
+    this.$router.replace({
+      path:'/money'
+    })
   }
 }
 </script>
@@ -48,11 +58,17 @@ export default class Labels extends Vue{
 }
 </style>
 
+
 <style lang="scss" scoped>
-  .tags {
-    background-color: #fff;
+.labels {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  > .tags {
+    flex-grow: 1;
     font-size: 16px;
     padding: 0 16px;
+    overflow: auto;
     > li {
       border-bottom: 1px solid #ccc;
       display: flex;
@@ -68,19 +84,21 @@ export default class Labels extends Vue{
 
   }
   .add {
-    position: absolute;
+    position: fixed;
     background-color: #EFEFEF;
     width: 68px;
     height: 68px;
     border-radius: 50%;
-    bottom: 25px;
-    right: 25px;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
     border: none;
-    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .1);
+
     .icon {
       width: 32px;
       height: 32px;
     }
   }
-
+}
 </style>

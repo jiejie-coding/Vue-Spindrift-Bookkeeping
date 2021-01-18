@@ -1,17 +1,22 @@
 <template>
-  <div>
-    <ul class="types">
+  <Nav>
+    <div slot="left"><slot name="left"></slot></div>
+    <ul class="types" slot="center">
       <li :class="value === '-' && 'selected'" @click="selectType('-')">支出</li>
       <li :class="value === '+' && 'selected'" @click="selectType('+')">收入</li>
     </ul>
-  </div>
+    <div slot="right"><slot name="right"></slot></div>
+  </Nav>
 </template>
 
 <script lang="ts">
   import Vue from 'vue'
   import {Component, Prop} from 'vue-property-decorator';
-  @Component
-  export default class Types extends Vue {
+  import Nav from '@/components/nav/Nav.vue';
+  @Component({
+    components: {Nav}
+  })
+  export default class MoneyNav extends Vue {
     @Prop() readonly value!: string;
 
     selectType(type: string) {

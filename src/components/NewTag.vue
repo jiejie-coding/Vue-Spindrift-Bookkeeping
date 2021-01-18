@@ -1,6 +1,10 @@
 <template>
-  <Layout class-prefix="newTag">
-    <h3 class="title">新增支出标签：</h3>
+  <div class="newTag">
+    <Nav>
+      <div slot="left" @click="goBack"><Icons name="return"/></div>
+      <div class="title" slot="center">新增支出标签</div>
+      <div slot="right" class="save" @click="save">保存</div>
+    </Nav>
     <div class="input">
       <div class="input-text">
         <span>名称</span>
@@ -9,21 +13,20 @@
       <div class="input-icon">图标</div>
     </div>
     <Tags :data-source="Tags" @update:value='onUpdateTags'/>
-    <div class="save">
-      <button class="save" @click="save">保存</button>
-    </div>
-  </Layout>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Tags from '@/components/money/Tags.vue';
+import Nav from '@/components/nav/Nav.vue';
 import {Component} from 'vue-property-decorator';
 import tagListModel from '@/model/tagListModel';
 
 
+
 @Component({
-  components:{Tags}
+  components:{Tags,Nav}
 })
 
 export default class NewTag extends Vue{
@@ -31,21 +34,24 @@ export default class NewTag extends Vue{
     {name:"icon1-5"},{name:"icon1-1"},{name:"icon1-8"},{name:"icon1-2"},
     {name:"icon1-7"},{name:"icon1-9"},{name:"icon1-10"},
     {name:"icon1-12"},
-    {name:"icon1-11"},];
-  value:string = '';
-  selectTag: string;
+    {name:"icon1-11"}];
+  value = '';
+  selectTag = '';
   onUpdateTags(value: object) {
-    this.selectTag = value.name;
+      this.selectTag = value.name;
   }
   save() {
     if(this.value === '') {
       alert("请输入标签名");
     } else {
-      console.log(11);
-      console.log(tagListModel.data);
-      tagListModel.add({name:this.selectTag,value:this.value})
-      console.log(tagListModel.data);
+      tagListModel.add({name:this.selectTag,value:this.value});
+      this.value = '';
     }
+  }
+  goBack() {
+    this.$router.replace({
+      path:'/labels'
+    })
   }
 }
 </script>
@@ -54,19 +60,12 @@ export default class NewTag extends Vue{
 <style lang="scss" scoped>
 @import '~@/assets/style/helper.scss';
   .title {
+    //border: 1px solid red;
     position: relative;
+    font-size: 18px;
     height: 64px;
     line-height: 64px;
-    margin-left: 20px;
-    &::after {
-      content: '';
-      position: absolute;
-      width: 120px;
-      height: 2px;
-      background-color: $color-base;
-      bottom: 10px;
-      left: -2px;
-    }
+    text-align: center;
   }
   .input {
     padding: 0 40px;
@@ -87,8 +86,6 @@ export default class NewTag extends Vue{
     }
   }
   .save {
-    width: 58px;
-    height: 32px;
-    margin: 30px auto;
+    line-height: 64px;
   }
 </style>

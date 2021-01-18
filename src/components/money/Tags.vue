@@ -10,12 +10,14 @@
         </div>
       </li>
       <li>
-        <div @click="create" class="item-wrapper">
+        <router-link to="/Labels">
+        <div class="item-wrapper">
           <div class="icon-wrapper">
             <Icons name="define"/>
           </div>
           新增
         </div>
+        </router-link>
       </li>
     </ul>
   </div>
@@ -31,14 +33,6 @@ export default class Tags extends Vue{
   selects(tag: Record<string, any>) {
     this.selectedTags = tag;
     this.$emit('update:value',this.selectedTags);
-  }
-  create() {
-    // const name = window.prompt("请输入标签名");
-    // if(name === '') {
-    //   window.alert('标签名不为空');
-    // } else if(this.dataSource) {
-    //     this.$emit('update:dataSource',[...this.dataSource,name]);
-    // }
   }
 }
 </script>

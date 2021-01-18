@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Types from '@/components/money/Types.vue';
+import Types from '@/components/nav/MoneyNav.vue';
 import Tags from '@/components/money/Tags.vue';
 import Notes from '@/components/money/Notes.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
