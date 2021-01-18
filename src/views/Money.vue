@@ -1,7 +1,7 @@
 <template>
   <Layout class-prefix="layout">
     <Types :value.sync="record.types"/>
-    <Tags :data-source="Tags" @update:value='onUpdateTags'/>
+    <Tags :data-source="Tags" @update:value='onUpdateTags' :addNewTag="true"/>
     <Notes @update:value="onUpdateNotes"/>
     <NumberPad :value.sync="record.amount"  @submit="saveRecord"/>
 <!--    {{recordList}}-->
@@ -11,7 +11,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Types from '@/components/nav/MoneyNav.vue';
-import Tags from '@/components/money/Tags.vue';
+import Tags from '@/components/tags/Tags.vue';
 import Notes from '@/components/money/Notes.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
 import {Component, Watch} from 'vue-property-decorator';

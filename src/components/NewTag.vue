@@ -8,19 +8,17 @@
       </div>
       <div class="input-icon">图标</div>
     </div>
-    <Tags :data-source="Tags" @update:value='onUpdateTags'/>
+    <Tags :data-source="Tags" @update:value='onUpdateTags' :addNewTag="false"/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Tags from '@/components/money/Tags.vue';
+import Tags from '@/components/tags/Tags.vue';
 import Nav from '@/components/nav/Nav.vue';
 import {Component} from 'vue-property-decorator';
 import tagListModel from '@/model/tagListModel';
 import ItemNav from '@/components/nav/ItemNav.vue';
-
-
 
 @Component({
   components:{ItemNav, Tags,Nav}
@@ -36,14 +34,6 @@ export default class NewTag extends Vue{
   selectTag = '';
   onUpdateTags(value: object) {
       this.selectTag = value.name;
-  }
-  save() {
-    if(this.value === '') {
-      alert("请输入标签名");
-    } else {
-      tagListModel.add({name:this.selectTag,value:this.value});
-      this.value = '';
-    }
   }
 }
 </script>

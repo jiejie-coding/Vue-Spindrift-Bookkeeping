@@ -9,15 +9,15 @@
           {{tag.value}}
         </div>
       </li>
-      <li>
-        <router-link to="/Labels">
+      <li v-if="addNewTag">
         <div class="item-wrapper">
           <div class="icon-wrapper">
-            <Icons name="define"/>
+            <router-link to="/Labels">
+              <Icons name="define"/>
+            </router-link>
           </div>
           新增
         </div>
-        </router-link>
       </li>
     </ul>
   </div>
@@ -28,9 +28,10 @@ import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 @Component
 export default class Tags extends Vue{
-  @Prop() dataSource!: Record<string, any>[];
+  @Prop() dataSource!: object[];
+  @Prop() addNewTag: boolean;
   selectedTags = this.dataSource && this.dataSource[0];
-  selects(tag: Record<string, any>) {
+  selects(tag: object) {
     this.selectedTags = tag;
     this.$emit('update:value',this.selectedTags);
   }
