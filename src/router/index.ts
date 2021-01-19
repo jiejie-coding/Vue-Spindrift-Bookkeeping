@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import Money from '@/views/Money.vue';
-import Statistics from '@/views/Statistics.vue';
-import Labels from '@/views/Labels.vue';
-import NotFound from '@/views/NotFound.vue';
-import NewTag from '@/views/NewTag.vue';
+
+const Money = () => import('@/views/Money.vue');
+const Statistics = () => import('@/views/Statistics.vue');
+const Labels = () => import('@/views/Labels.vue');
+const NotFound = () => import('@/views/NotFound.vue');
+const NewTag = () => import('@/views/NewTag.vue');
 
 Vue.use(VueRouter)
 
