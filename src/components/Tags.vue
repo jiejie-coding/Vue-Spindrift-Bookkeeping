@@ -9,12 +9,10 @@
           {{tag.value}}
         </div>
       </li>
-      <li v-if="addNewTag">
+      <li v-if="addNewTag" @click="goLabel">
         <div class="item-wrapper">
           <div class="icon-wrapper">
-            <router-link to="/Labels">
               <Icons name="define"/>
-            </router-link>
           </div>
           新增
         </div>
@@ -29,8 +27,11 @@ import {Component, Prop} from 'vue-property-decorator';
 @Component
 export default class Tags extends Vue{
   @Prop() dataSource!: object[];
-  @Prop() addNewTag: boolean;
+  @Prop() addNewTag = true;
   selectedTags = this.dataSource && this.dataSource[0];
+  goLabel() {
+    this.$router.replace('/labels');
+  }
   selects(tag: object) {
     this.selectedTags = tag;
     this.$emit('update:value',this.selectedTags);
@@ -47,6 +48,11 @@ export default class Tags extends Vue{
   font-size: 14px;
   padding: 0 16px;
   overflow: auto;
+  .icon {
+    width: 32px;
+    height: 32px;
+    display: block;
+  }
   > .current {
     display: flex;
     flex-wrap: wrap;
@@ -71,16 +77,11 @@ export default class Tags extends Vue{
           &.selected {
             @extend %outerShadow;
             background-color: #e3e3e3;
-
           }
         }
       }
     }
   }
-  .icon {
-    width: 32px;
-    height: 32px;
-    display: block;
-  }
+
 }
 </style>
