@@ -3,7 +3,9 @@
     <div slot="left" @click="goBack" class="left">
       <Icons name="return"/>
     </div>
-    <div slot="center" class="center"><Types value="types"/></div>
+    <div slot="center" class="center">
+      <Types :value.sync="types"/>
+    </div>
     <div slot="right" class="right">保存</div>
   </Nav>
 </template>
@@ -18,7 +20,7 @@ import Types from '@/components/Types.vue';
   components:{Nav,Types}
 })
 export default class LabelNav extends Vue{
-  types:string = '-';
+  types = '+';
   goBack() {
     this.$router.replace({
       path:'/money'

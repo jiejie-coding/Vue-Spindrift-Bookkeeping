@@ -1,10 +1,8 @@
 <template>
   <Nav>
-<!--    <div slot="left"></div>-->
     <div slot="center">
-      <Types/>
+      <Types :value.sync="types"/>
     </div>
-<!--    <div slot="right"></div>-->
   </Nav>
 </template>
 
@@ -17,14 +15,7 @@
     components: {Types, Nav}
   })
   export default class MoneyNav extends Vue {
-    @Prop() readonly value!: string;
-
-    selectType(type: string) {
-      if(type !== '+' && type !== '-') {
-        console.log(new Error('Type is wrong'));
-      }
-      this.$emit('update:value',type);
-    }
+    types = '-';
   }
 </script>
 
