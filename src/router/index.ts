@@ -4,7 +4,7 @@ import Money from '@/views/Money.vue';
 import Statistics from '@/views/Statistics.vue';
 import Labels from '@/views/Labels.vue';
 import NotFound from '@/views/NotFound.vue';
-import NewTag from '@/components/NewTag.vue';
+import NewTag from '@/views/NewTag.vue';
 
 Vue.use(VueRouter)
 
@@ -36,7 +36,8 @@ const routes: Array<RouteConfig> = [
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  linkActiveClass: 'activeClass'
 })
 
 export default router
