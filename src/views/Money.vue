@@ -11,7 +11,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Types from '@/components/nav/MoneyNav.vue';
-import Tags from '@/components/tags/Tags.vue';
+import Tags from '@/components/Tags.vue';
 import Notes from '@/components/money/Notes.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
 import {Component, Watch} from 'vue-property-decorator';
