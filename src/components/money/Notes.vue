@@ -1,9 +1,12 @@
 <template>
   <div>
-    <label class="notes">
-      <span class="name"><Icons name="notes"/>{{value}}</span>
+    <div class="notes">
+      <span class="name"><Icons name="notes"/></span>
       <input type="text" v-model="value" placeholder="请输入备注"/>
-    </label>
+      <div class="times">
+        <slot/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,6 +26,7 @@ export default class Notes extends Vue{
 
 <style lang="scss" scoped>
 .notes {
+  //border: 1px solid green;
   display: flex;
   align-items: center;
   background: #f5f5f5;
@@ -42,5 +46,11 @@ export default class Notes extends Vue{
     height: 25px;
     margin-top: 3px;
   }
+}
+.times {
+  width: 40%;
+  padding-right: 8px;
+  //border: 1px solid red;
+  overflow: hidden;
 }
 </style>

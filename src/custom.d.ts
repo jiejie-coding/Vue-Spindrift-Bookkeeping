@@ -3,4 +3,5 @@ type recordItem = {
   types: string;
   notes: string;
   amount: number;
+  times: string;
 }

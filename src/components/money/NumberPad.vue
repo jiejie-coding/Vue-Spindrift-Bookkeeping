@@ -1,9 +1,6 @@
 <template>
   <div class="numberPad">
     <div class="output">
-      <div class="times">
-        <Icons name="times"/>
-      </div>
       ￥{{output}}
     </div>
     <div class="buttons" @click="inputContent">
@@ -81,9 +78,6 @@
     padding: 9px 16px;
     text-align: right;
     height: 72px;
-    .times {
-      float: left;
-    }
   }
   .buttons {
     @extend %clearFix;

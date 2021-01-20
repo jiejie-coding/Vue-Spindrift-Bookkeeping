@@ -14,9 +14,6 @@ export default class Types extends Vue {
   @Prop() readonly value: string | undefined;
 
   selectType(type: string) {
-    if(type !== '+' && type !== '-') {
-      console.log(new Error('Type is wrong'));
-    }
     this.$emit('update:value',type);
   }
 }
