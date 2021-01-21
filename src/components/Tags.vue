@@ -27,7 +27,7 @@ import {Component, Prop} from 'vue-property-decorator';
 @Component
 export default class Tags extends Vue{
   @Prop() dataSource!: object[];
-  @Prop() addNewTag = true;
+  @Prop({default: false}) addNewTag!: boolean;
   selectedTags = this.dataSource && this.dataSource[0];
   goLabel() {
     this.$router.replace('/labels');
