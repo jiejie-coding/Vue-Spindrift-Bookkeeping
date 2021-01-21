@@ -82,17 +82,39 @@
   .buttons {
     @extend %clearFix;
     > button {
-      border: 0.5px solid #777;
+      border: none;
       width: 25%;
       height: 48px;
       float: left;
-      background-color: #EFEFEF;
+      //background-color: #EFEFEF;
       &.ok {
         height: 48*2px;
         float: right;
       }
       &.zero {
         width: 50%;
+      }
+      $bg: $color-base;
+      &:nth-child(1) {
+        background: lighten($bg, 6*6%);
+      }
+      &:nth-child(2), &:nth-child(5) {
+        background: lighten($bg, 6*5%);
+      }
+      &:nth-child(3), &:nth-child(6), &:nth-child(9) {
+        background: lighten($bg, 6*4%);
+      }
+      &:nth-child(4), &:nth-child(7), &:nth-child(10) {
+        background: lighten($bg, 6*3%);
+      }
+      &:nth-child(8), &:nth-child(11), &:nth-child(13) {
+        background: lighten($bg, 6*2%);
+      }
+      &:nth-child(14) {
+        background: lighten($bg, 6%);
+      }
+      &:nth-child(12) {
+        background: $bg;
       }
     }
 
