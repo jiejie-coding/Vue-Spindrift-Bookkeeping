@@ -20,7 +20,7 @@ import Types from '@/components/Types.vue';
   components:{Nav,Types}
 })
 export default class LabelNav extends Vue{
-  types = '+';
+  types = '';
   goBack() {
     this.$router.replace({
       path:'/money'

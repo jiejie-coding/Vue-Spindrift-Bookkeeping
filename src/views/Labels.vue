@@ -3,7 +3,7 @@
   <div class="labels">
     <LabelNav/>
     <ul class="tags">
-      <li v-for="tag in tags">
+      <li v-for="tag in tagList">
         <span>
           <Icons :name="tag.name"/>
           {{tag.value}}
@@ -14,9 +14,9 @@
       </li>
     </ul>
 
-    <router-link tag="button" to="/labels/newTag" class="add">
+    <button class="add" @click="goNewTag">
       <icons name="define"/>
-    </router-link>
+    </button>
   </div>
   </Layout>
 </template>
@@ -25,21 +25,25 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Types from '@/components/nav/MoneyNav.vue';
-import tagListModel from '@/model/tagListModel';
+// import tagListModel from '@/model/tagListModel';
 import LabelNav from '@/components/nav/LabelNav.vue';
 
-tagListModel.fetch();
+// tagListModel.fetch();
 
 @Component({
   components: {LabelNav, Types},
 })
 export default class Labels extends Vue{
-  types = '-';
-  tags = tagListModel.data;
-
-  deleteTag(name: object) {
-    tagListModel.remove(name);
-    this.tags = tagListModel.data;
+  get tagList() {
+    return this.$store.state.tagList;
+  }
+  deleteTag(item: object) {
+    this.$store.commit('removeTag',item)
+  }
+  goNewTag() {
+    //TODO
+    // this.$store.commit('setType',);
+    this.$router.replace('/labels/newTag');
   }
 
 }

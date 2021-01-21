@@ -1,7 +1,7 @@
 <template>
   <Nav class-prefix="itemNav">
     <div slot="left" @click="goBack" class="left"><Icons name="return"/></div>
-    <div class="center" slot="center">新增支出标签</div>
+    <div class="center" slot="center">新增{{showStr}}标签</div>
     <div slot="right" class="right" @click="save">保存</div>
   </Nav>
 </template>
@@ -9,7 +9,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import tagListModel from '@/model/tagListModel';
 import Nav from '@/components/nav/Nav.vue';
 
 @Component({
@@ -18,19 +17,26 @@ import Nav from '@/components/nav/Nav.vue';
 export default class ItemNav extends Vue{
   @Prop() value!: string;
   @Prop() name!: string;
+  showStr = '';
+  created() {
+    const types = this.$store.state.selectedType;
+    if(types === '+') {
+      this.showStr = '收入';
+    } else {
+      this.showStr = '支出';
+    }
+  }
   save() {
     if(this.value === '') {
       alert("请输入标签名");
     } else {
-      tagListModel.add({name:this.name,value:this.value});
-      alert('保存成功');
-      this.$emit('update:value');
+      const item = {name:this.name,value:this.value};
+      this.$store.commit('createTag',item);
     }
   }
   goBack() {
     this.$router.replace('/labels');
   }
-
 }
 </script>
 

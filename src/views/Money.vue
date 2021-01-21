@@ -1,11 +1,12 @@
 <template>
   <Layout class-prefix="layout">
     <Types :value.sync="record.types"/>
-    <Tags :data-source="Tags" @update:value='onUpdateTags' :addNewTag="true"/>
+    <Tags :data-source="tagList" @update:value='onUpdateTags' :addNewTag="true"/>
     <Notes @update:value="onUpdateNotes"><DatePicker @update:value='onUpdateTimes'/></Notes>
     <NumberPad :value.sync="record.amount"  @submit="saveRecord"/>
     {{recordList}}
   </Layout>
+
 </template>
 
 <script lang="ts">
@@ -16,23 +17,24 @@ import Notes from '@/components/money/Notes.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
 import DatePicker from '@/components/money/DatePicker.vue';
 import {Component, Prop, Watch} from 'vue-property-decorator';
-import recordListModel from '@/model/recordListModel'
-import tagListModel from '@/model/tagListModel';
-
-const recordLists = recordListModel.fetch();
-const tagList = tagListModel.fetch();
 
 @Component({
   components: {NumberPad, Notes, Tags, Types, DatePicker},
 })
 export default class Money extends Vue{
-  Tags: object[] | object = tagList;
+  get recordList() {
+    return this.$store.state.recordList;
+  }
+  get tagList() {
+    return this.$store.state.tagList;
+  }
+
   created() {
-    this.Tags = tagListModel.fetch();
+    this.$store.commit('fetchTags');
+    this.$store.commit('fetchRecords');
     console.log(111);
   }
-  record: recordItem = {tags:{name:"icon1-1",value:'衣服'}, notes:'', amount: 0, types: '-',times: ''}
-  recordList: recordItem[] = recordLists;
+  record: recordItem = {tags:{}, notes:'', amount: 0, types: '-',times: ''}
 
   onUpdateTags(value: object) {
     this.record.tags = value;
@@ -41,17 +43,12 @@ export default class Money extends Vue{
     this.record.notes = value;
   }
   onUpdateTimes(times: string) {
-    // console.log(times);
     this.record.times = times;
   }
   saveRecord(){
-    this.recordList.push(recordListModel.clone(this.record));
+    this.$store.commit('createRecord', this.record);
   }
 
-  @Watch('recordList')
-  onRecordListChanged() {
-    recordListModel.save(this.recordList);
-  }
 
 }
 </script>

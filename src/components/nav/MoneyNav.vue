@@ -8,7 +8,7 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import {Component, Prop} from 'vue-property-decorator';
+  import {Component, Prop, Watch} from 'vue-property-decorator';
   import Nav from '@/components/nav/Nav.vue';
   import Types from '@/components/Types.vue';
   @Component({
@@ -16,6 +16,11 @@
   })
   export default class MoneyNav extends Vue {
     types = '-';
+    @Watch('types')
+    onTypesChanged(type: string) {
+      console.log(this.types);
+      this.$emit('update:value',type)
+    }
   }
 </script>
 

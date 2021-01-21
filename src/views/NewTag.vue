@@ -19,7 +19,6 @@ import Vue from 'vue'
 import Tags from '@/components/Tags.vue';
 import Nav from '@/components/nav/Nav.vue';
 import {Component} from 'vue-property-decorator';
-import tagListModel from '@/model/tagListModel';
 import ItemNav from '@/components/nav/ItemNav.vue';
 
 @Component({
@@ -34,7 +33,7 @@ export default class NewTag extends Vue{
     {name:"icon1-11"}];
   value = '';
   selectTag = '';
-  onUpdateTags(value: { name: string;value: string }) {
+  onUpdateTags(value: tagItem) {
       this.selectTag = value.name;
   }
 }

@@ -5,3 +5,8 @@ type recordItem = {
   amount: number;
   times: string;
 }
+
+type tagItem = {
+  name: string;
+  value: string;
+}
