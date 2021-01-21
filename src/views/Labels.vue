@@ -1,4 +1,5 @@
 <template>
+  <Layout>
   <div class="labels">
     <LabelNav/>
     <ul class="tags">
@@ -13,13 +14,11 @@
       </li>
     </ul>
 
-    <router-link to="/labels/newTag">
-      <button class="add">
-        <icons name="define"/>
-      </button>
+    <router-link tag="button" to="/labels/newTag" class="add">
+      <icons name="define"/>
     </router-link>
   </div>
-
+  </Layout>
 </template>
 
 <script lang="ts">
@@ -46,18 +45,11 @@ export default class Labels extends Vue{
 }
 </script>
 
-<style lang="scss">
-.tags-content {
-  position: relative;
-}
-</style>
-
-
 <style lang="scss" scoped>
 .labels {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   > .tags {
     flex-grow: 1;
     font-size: 16px;
@@ -83,7 +75,7 @@ export default class Labels extends Vue{
     width: 68px;
     height: 68px;
     border-radius: 50%;
-    bottom: 50px;
+    bottom: 68px;
     left: 50%;
     transform: translateX(-50%);
     border: none;

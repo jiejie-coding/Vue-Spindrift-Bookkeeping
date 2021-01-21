@@ -1,15 +1,17 @@
 <template>
-  <div class="newTag">
-    <ItemNav  :value.sync="value" :name="selectTag"/>
-    <div class="input">
-      <div class="input-text">
-        <span>名称：</span>
-        <input type="text" placeholder="4个字以内" v-model="value"/>
+  <Layout>
+    <div class="newTag">
+      <ItemNav  :value.sync="value" :name="selectTag"/>
+      <div class="input">
+        <div class="input-text">
+          <span>名称：</span>
+          <input type="text" placeholder="4个字以内" v-model="value"/>
+        </div>
+        <div class="input-icon">选择图标</div>
       </div>
-      <div class="input-icon">选择图标</div>
+      <Tags :data-source="Tags" @update:value='onUpdateTags'/>
     </div>
-    <Tags :data-source="Tags" @update:value='onUpdateTags'/>
-  </div>
+  </Layout>
 </template>
 
 <script lang="ts">
@@ -45,9 +47,9 @@ export default class NewTag extends Vue{
     font-size: 16px;
     .input-text {
       width: 100%;
-      margin-top: 5px;
+      margin-top: 3px;
       padding-left: 20px;
-      background: lighten($color-base, 4*6%);
+      background: #EEEEEE;
       height: 48px;
       line-height: 48px;
       > input {

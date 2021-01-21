@@ -84,11 +84,11 @@
     > button {
       border: none;
       width: 25%;
-      height: 48px;
+      height: 7vh;
       float: left;
       //background-color: #EFEFEF;
       &.ok {
-        height: 48*2px;
+        height: 14vh;
         float: right;
       }
       &.zero {
