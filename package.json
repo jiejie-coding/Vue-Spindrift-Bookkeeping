@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "element-ui": "^2.15.0",
     "register-service-worker": "^1.7.1",
     "svgo-loader": "^2.2.1",
     "vue": "^2.6.11",
