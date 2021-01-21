@@ -3,10 +3,10 @@
     <ItemNav  :value.sync="value" :name="selectTag"/>
     <div class="input">
       <div class="input-text">
-        <span>名称</span>
+        <span>名称：</span>
         <input type="text" placeholder="4个字以内" v-model="value"/>
       </div>
-      <div class="input-icon">图标</div>
+      <div class="input-icon">选择图标</div>
     </div>
     <Tags :data-source="Tags" @update:value='onUpdateTags'/>
   </div>
@@ -42,21 +42,23 @@ export default class NewTag extends Vue{
 <style lang="scss" scoped>
 @import '~@/assets/style/helper.scss';
   .input {
-    padding: 0 40px;
-    font-size: 18px;
+    font-size: 16px;
     .input-text {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 84px;
+      width: 100%;
+      margin-top: 5px;
+      padding-left: 20px;
+      background: lighten($color-base, 4*6%);
+      height: 48px;
+      line-height: 48px;
       > input {
-        padding-left: 18px;
-        font-size: 14px;
-        height: 32px;
-        width: 80%;
+        background-color: inherit;
+        margin-left: 10px;
         border: none;
-        border-bottom: 1px solid #777777;
       }
+    }
+    .input-icon {
+        margin-top: 20px;
+      text-align: center;
     }
   }
 </style>
