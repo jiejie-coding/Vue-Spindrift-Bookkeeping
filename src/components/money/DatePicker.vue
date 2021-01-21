@@ -1,12 +1,14 @@
 <template>
-    <el-date-picker
-        v-model="value"
-        type="date"
-        @focus="forbid">
-    </el-date-picker>
+  <el-date-picker
+      v-model="value"
+      type="date"
+      @focus="forbid">
+  </el-date-picker>
 </template>
 
 <script>
+import formatDate from "@/lib/formatDate";
+
 export default {
   data() {
     return {
@@ -26,41 +28,34 @@ export default {
   },
   watch: {
     value(date) {
-      const year = date.getFullYear();
-      let month = date.getMonth() + 1;
-      let strDate = date.getDate();
-      if (month >= 1 && month <= 9) {
-          month = "0" + month;
-      }
-      if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-      }
-      const currentdate = year + '-' + month + '-' + strDate;
-      this.$emit('update:value',currentdate);
+      this.$emit('update:value',formatDate(date));
     }
+  },
+  mounted() {
+    this.$emit('update:value',formatDate(new Date()));
   }
 };
 </script>
 
 <style lang="scss">
 @import "~@/assets/style/helper.scss";
-    .el-date-editor {
-      width: 100% !important;
-      > .el-input__inner{
-        text-align: center;
-        background-color: $color-base;
-        color: #ffffff;
-        width: 100%;
-        border-radius: 30px;
-        &::placeholder {
-          color: #ffffff;
-       }
-      }
-      > .el-input__prefix {
-        display: none;
-      }
-      > .el-input__suffix {
-        display: none;
-      }
+.el-date-editor {
+  width: 100% !important;
+  > .el-input__inner{
+    text-align: center;
+    background-color: $color-base;
+    color: #ffffff;
+    width: 100%;
+    border-radius: 30px;
+    &::placeholder {
+      color: #ffffff;
     }
+  }
+  > .el-input__prefix {
+    display: none;
+  }
+  > .el-input__suffix {
+    display: none;
+  }
+}
 </style>
