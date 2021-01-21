@@ -1,6 +1,6 @@
 <template>
   <div class="newTag">
-    <ItemNav/>
+    <ItemNav  :value.sync="value" :name="selectTag"/>
     <div class="input">
       <div class="input-text">
         <span>名称</span>
@@ -8,13 +8,13 @@
       </div>
       <div class="input-icon">图标</div>
     </div>
-    <Tags :data-source="Tags" @update:value='onUpdateTags' :addNewTag="false"/>
+    <Tags :data-source="Tags" @update:value='onUpdateTags'/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Tags from '@/components/tags/Tags.vue';
+import Tags from '@/components/Tags.vue';
 import Nav from '@/components/nav/Nav.vue';
 import {Component} from 'vue-property-decorator';
 import tagListModel from '@/model/tagListModel';
@@ -27,12 +27,12 @@ import ItemNav from '@/components/nav/ItemNav.vue';
 export default class NewTag extends Vue{
   Tags: object[] = [{name:"icon1-3"},{name:"icon1-4"},
     {name:"icon1-5"},{name:"icon1-1"},{name:"icon1-8"},{name:"icon1-2"},
-    {name:"icon1-7"},{name:"icon1-9"},{name:"icon1-10"},
+    {name:"icon1-7"},{name:"icon1-9"},{name:"define"},
     {name:"icon1-12"},
     {name:"icon1-11"}];
   value = '';
   selectTag = '';
-  onUpdateTags(value: object) {
+  onUpdateTags(value: { name: string;value: string }) {
       this.selectTag = value.name;
   }
 }
