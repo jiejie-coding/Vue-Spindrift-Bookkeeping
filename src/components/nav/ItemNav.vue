@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 import tagListModel from '@/model/tagListModel';
 import Nav from '@/components/nav/Nav';
 
@@ -16,18 +16,18 @@ import Nav from '@/components/nav/Nav';
   components:{Nav}
 })
 export default class ItemNav extends Vue{
+  @Prop() value!: string;
+  @Prop() name!: string;
   save() {
     if(this.value === '') {
       alert("请输入标签名");
     } else {
-      tagListModel.add({name:this.selectTag,value:this.value});
-      this.value = '';
+      tagListModel.add({name:this.name,value:this.value});
+      this.$emit('update:value');
     }
   }
   goBack() {
-    this.$router.replace({
-      path:'/labels'
-    })
+    this.$router.replace('/labels');
   }
 
 }
