@@ -10,7 +10,7 @@
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 import tagListModel from '@/model/tagListModel';
-import Nav from '@/components/nav/Nav';
+import Nav from '@/components/nav/Nav.vue';
 
 @Component({
   components:{Nav}
@@ -23,6 +23,7 @@ export default class ItemNav extends Vue{
       alert("请输入标签名");
     } else {
       tagListModel.add({name:this.name,value:this.value});
+      alert('保存成功');
       this.$emit('update:value');
     }
   }

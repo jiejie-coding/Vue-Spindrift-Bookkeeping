@@ -36,6 +36,9 @@ export default class Tags extends Vue{
     this.selectedTags = tag;
     this.$emit('update:value',this.selectedTags);
   }
+  mounted() {
+    this.$emit('update:value',this.selectedTags);
+  }
 }
 </script>
 
