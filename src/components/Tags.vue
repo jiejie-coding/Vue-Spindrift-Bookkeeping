@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag.name">
+      <li v-for="tag in dataSource" :key="tag.value">
         <div @click="selects(tag)" class="item-wrapper">
           <div :class="{'selected': selectedTags === tag}" class="icon-wrapper">
             <Icons :name="tag.name"/>
@@ -23,12 +23,16 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
+import {Component, Prop, Watch} from 'vue-property-decorator';
 @Component
 export default class Tags extends Vue{
   @Prop() dataSource!: object[];
   @Prop({default: false}) addNewTag!: boolean;
   selectedTags = this.dataSource && this.dataSource[0];
+  @Watch('dataSource')
+  onDataSourceChanged(type: string) {
+    this.selectedTags = this.dataSource && this.dataSource[0];
+  }
   goLabel() {
     this.$router.replace('/labels');
   }
@@ -37,6 +41,9 @@ export default class Tags extends Vue{
     this.$emit('update:value',this.selectedTags);
   }
   mounted() {
+    this.$emit('update:value',this.selectedTags);
+  }
+  updated() {
     this.$emit('update:value',this.selectedTags);
   }
 }

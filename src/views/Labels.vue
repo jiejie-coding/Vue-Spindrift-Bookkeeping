@@ -25,24 +25,23 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Types from '@/components/nav/MoneyNav.vue';
-// import tagListModel from '@/model/tagListModel';
 import LabelNav from '@/components/nav/LabelNav.vue';
 
-// tagListModel.fetch();
 
 @Component({
   components: {LabelNav, Types},
 })
 export default class Labels extends Vue{
+  created() {
+    this.$store.commit('fetchTags');
+  }
   get tagList() {
     return this.$store.state.tagList;
   }
-  deleteTag(item: object) {
-    this.$store.commit('removeTag',item)
+  deleteTag(item: tagItem) {
+    this.$store.commit('removeTag',item);
   }
   goNewTag() {
-    //TODO
-    // this.$store.commit('setType',);
     this.$router.replace('/labels/newTag');
   }
 

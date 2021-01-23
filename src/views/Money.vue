@@ -1,10 +1,10 @@
 <template>
   <Layout class-prefix="layout">
-    <Types :value.sync="record.types"/>
+    <Types/>
     <Tags :data-source="tagList" @update:value='onUpdateTags' :addNewTag="true"/>
     <Notes @update:value="onUpdateNotes"><DatePicker @update:value='onUpdateTimes'/></Notes>
     <NumberPad :value.sync="record.amount"  @submit="saveRecord"/>
-    {{recordList}}
+<!--    {{recordList}}-->
   </Layout>
 
 </template>
@@ -32,7 +32,6 @@ export default class Money extends Vue{
   created() {
     this.$store.commit('fetchTags');
     this.$store.commit('fetchRecords');
-    console.log(111);
   }
   record: recordItem = {tags:{}, notes:'', amount: 0, types: '-',times: ''}
 
@@ -46,9 +45,9 @@ export default class Money extends Vue{
     this.record.times = times;
   }
   saveRecord(){
+    this.record.types = this.$store.state.selectedType;
     this.$store.commit('createRecord', this.record);
   }
-
 
 }
 </script>

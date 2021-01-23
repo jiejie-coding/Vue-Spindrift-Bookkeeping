@@ -4,7 +4,7 @@
       <Icons name="return"/>
     </div>
     <div slot="center" class="center">
-      <Types :value.sync="types"/>
+      <Types/>
     </div>
     <div slot="right" class="right">保存</div>
   </Nav>
@@ -20,7 +20,6 @@ import Types from '@/components/Types.vue';
   components:{Nav,Types}
 })
 export default class LabelNav extends Vue{
-  types = '';
   goBack() {
     this.$router.replace({
       path:'/money'

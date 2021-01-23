@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class="newTag">
-      <ItemNav  :value.sync="value" :name="selectTag"/>
+      <ItemNav :value.sync="value" :name="selectTag"/>
       <div class="input">
         <div class="input-text">
           <span>名称：</span>
@@ -26,16 +26,15 @@ import ItemNav from '@/components/nav/ItemNav.vue';
 })
 
 export default class NewTag extends Vue{
-  Tags: object[] = [{name:"icon1-3"},{name:"icon1-4"},
-    {name:"icon1-5"},{name:"icon1-1"},{name:"icon1-8"},{name:"icon1-2"},
-    {name:"icon1-7"},{name:"icon1-9"},{name:"define"},
-    {name:"icon1-12"},
-    {name:"icon1-11"}];
   value = '';
   selectTag = '';
+  get Tags() {
+    return this.$store.state.newTag;
+  }
   onUpdateTags(value: tagItem) {
       this.selectTag = value.name;
   }
+
 }
 </script>
 

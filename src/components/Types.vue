@@ -7,14 +7,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {Component, Prop} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
 
 @Component
 export default class Types extends Vue {
-  @Prop() readonly value: string | undefined;
+  get value() {
+    return this.$store.state.selectedType;
+  }
 
   selectType(type: string) {
-    this.$emit('update:value',type);
+    this.$store.commit('changeSelectType',type);
+    this.$store.commit('fetchTags');
   }
 }
 </script>
