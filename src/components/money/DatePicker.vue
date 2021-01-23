@@ -37,11 +37,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .el-date-editor {
   width: 100% !important;
-  > .el-input__inner{
+  > ::v-deep .el-input__inner{
     text-align: center;
     background-color: $color-base;
     color: #ffffff;
@@ -51,10 +51,10 @@ export default {
       color: #ffffff;
     }
   }
-  > .el-input__prefix {
+  > ::v-deep .el-input__prefix {
     display: none;
   }
-  > .el-input__suffix {
+  > ::v-deep .el-input__suffix {
     display: none;
   }
 }
