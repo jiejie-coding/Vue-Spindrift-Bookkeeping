@@ -24,7 +24,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import Types from '@/components/nav/MoneyNav.vue';
+import Types from '@/components/Types.vue';
 import LabelNav from '@/components/nav/LabelNav.vue';
 
 

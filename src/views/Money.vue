@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Types from '@/components/nav/MoneyNav.vue';
+import Types from '@/components/Types.vue';
 import Tags from '@/components/Tags.vue';
 import Notes from '@/components/money/Notes.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
