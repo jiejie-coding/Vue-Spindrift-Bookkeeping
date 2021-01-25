@@ -9,4 +9,5 @@ type recordItem = {
 type tagItem = {
   name: string;
   value: string;
+  type: string;
 }

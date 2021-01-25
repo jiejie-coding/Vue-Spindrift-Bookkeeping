@@ -16,7 +16,7 @@ import {Component} from 'vue-property-decorator';
 
 @Component
 export default class Dropdown extends Vue {
-  selectedDate: string;
+  selectedDate: string = '';
   get dataSource() {
     return this.$store.state.showMonth;
   }
@@ -27,7 +27,6 @@ export default class Dropdown extends Vue {
     this.$store.commit('setMonth',this.selectedDate)
   }
   changed(item: any) {
-    console.log(item);
     this.selectedDate = item;
   }
 }

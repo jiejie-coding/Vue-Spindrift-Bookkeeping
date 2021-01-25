@@ -14,7 +14,7 @@
           <div class="icon-wrapper">
               <Icons name="define"/>
           </div>
-          新增
+          设置
         </div>
       </li>
     </ul>
