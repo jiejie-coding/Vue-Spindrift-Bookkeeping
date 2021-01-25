@@ -1,10 +1,9 @@
 <template>
-  <Layout class-prefix="layout">
+  <Layout class-prefix="money">
     <Types/>
     <Tags :data-source="tagList" @update:value='onUpdateTags' :addNewTag="true"/>
     <Notes @update:value="onUpdateNotes"><DatePicker @update:value='onUpdateTimes'/></Notes>
     <NumberPad :value.sync="record.amount"  @submit="saveRecord"/>
-<!--    {{recordList}}-->
   </Layout>
 
 </template>
@@ -58,7 +57,7 @@ export default class Money extends Vue{
 </script>
 
 <style lang="scss">
-  .layout-content {
+  .money-layout {
     display: flex;
     flex-direction: column;
   }

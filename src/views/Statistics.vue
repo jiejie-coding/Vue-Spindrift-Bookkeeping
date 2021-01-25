@@ -1,5 +1,5 @@
 <template>
-  <Layout class-prefix="layout">
+  <Layout class-prefix="statistics">
     <Types/>
     <TotalBar/>
     <Details/>
@@ -20,18 +20,8 @@ export default class Statistics extends Vue{
 </script>
 
 <style lang="scss">
-  .dropDown-content {
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-  }
-</style>
-
-<style lang="scss" scoped>
-@import "~@/assets/style/helper.scss";
-  //.nulls {
-  //  background-color: $color-base;
-  //  height: 50px;
-  //}
-
+.statistics-layout {
+  display: flex;
+  flex-direction: column;
+}
 </style>

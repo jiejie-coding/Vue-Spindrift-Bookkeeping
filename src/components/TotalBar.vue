@@ -29,7 +29,7 @@ export default class TotalBar extends Vue{
     const record = this.$store.state.recordList.filter(item => item.types === '-');
     record.filter(item =>  item.times.split(' ')[0].split('-')[1] === this.$store.state.curMonth);
     let sum = 0;
-    for(let item of record) {
+    for(const item of record) {
       sum += parseFloat(item.amount);
     }
     return sum;
@@ -38,7 +38,7 @@ export default class TotalBar extends Vue{
     const record = this.$store.state.recordList.filter(item => item.types === '+');
     record.filter(item =>  item.times.split(' ')[0].split('-')[1] === this.$store.state.curMonth);
     let sum = 0;
-    for(let item of record) {
+    for(const item of record) {
       sum += parseFloat(item.amount);
     }
     return sum;
@@ -50,7 +50,6 @@ export default class TotalBar extends Vue{
 </script>
 
 <style lang="scss" scoped>
-
 @import "~@/assets/style/helper.scss";
 .total {
   width: 90%;

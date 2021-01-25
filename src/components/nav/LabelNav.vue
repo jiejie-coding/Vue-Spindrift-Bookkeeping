@@ -6,7 +6,7 @@
     <div slot="center" class="center">
       <Types/>
     </div>
-    <div slot="right" class="right">保存</div>
+    <div slot="right" class="right">删除</div>
   </Nav>
 </template>
 
@@ -29,10 +29,11 @@ export default class LabelNav extends Vue{
 </script>
 
 <style lang="scss">
-  .labelNav-content {
+  .labelNav-nav {
     display: flex;
   }
 </style>
+
 <style lang="scss" scoped>
   .left,
   .right {

@@ -45,15 +45,15 @@ export default {
     text-align: center;
     background-color: $color-base;
     color: #ffffff;
-    width: 100%;
+    width: 100px;
     border-radius: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
     &::placeholder {
-      color: #ffffff;
+      color: inherit;
     }
   }
-  > ::v-deep .el-input__prefix {
-    display: none;
-  }
+  > ::v-deep .el-input__prefix,
   > ::v-deep .el-input__suffix {
     display: none;
   }

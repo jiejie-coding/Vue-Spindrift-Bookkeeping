@@ -36,7 +36,7 @@ export default class Notes extends Vue{
     padding-right: 16px;
   }
   > input {
-    height: 64px;
+    height: 54px;
     flex-grow: 1;
     border: none;
     background: transparent;
@@ -48,8 +48,7 @@ export default class Notes extends Vue{
   }
 }
 .times {
-  width: 40%;
-  padding-right: 8px;
+  padding-right: 18px;
   //border: 1px solid red;
   overflow: hidden;
 }

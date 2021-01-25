@@ -42,7 +42,7 @@ export default class ItemNav extends Vue{
 </script>
 
 <style lang="scss">
-  .itemNav-content {
+  .itemNav-nav {
     display: flex;
     height: 64px;
     line-height: 72px;

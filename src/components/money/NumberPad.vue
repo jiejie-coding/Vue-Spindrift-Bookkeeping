@@ -72,12 +72,13 @@
 .numberPad {
   .output {
     @extend %clearFix;
-    @extend %innerShadow;
+    //@extend %innerShadow;
+    background-color: #f5f5f5;
     font-size: 36px;
     font-family: Consolas,monospace;
     padding: 9px 16px;
     text-align: right;
-    height: 72px;
+    height: 64px;
   }
   .buttons {
     @extend %clearFix;

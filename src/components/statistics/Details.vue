@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="details">
   <div class="details"  v-for="(value,key) in recordList">
     <div class="dayTotal">{{key}}</div>
     <ul class="dayDetail">
@@ -27,16 +27,16 @@ import {Component} from 'vue-property-decorator';
 export default class Details extends Vue{
   get recordList() {
     let record = [] as recordItem[];
-    let type = this.$store.state.selectedType;
+    const type = this.$store.state.selectedType;
     if(type === '-') {
       record = this.$store.state.recordList.filter(item => item.types === '-');
     } else if(type === '+') {
       record = this.$store.state.recordList.filter(item => item.types === '+');
     }
-    let map: {[key:string]: recordItem[]} = {};
+    const map: {[key: string]: recordItem[]} = {};
     record.filter(item =>  item.times.split(' ')[0].split('-')[1] === this.$store.state.curMonth);
-    for(let item of record) {
-      let date = item.times.split(' ')[0];
+    for(const item of record) {
+      const date = item.times.split(' ')[0];
       map[date] = map[date] || [];
       map[date].push(item);
     }
@@ -59,15 +59,14 @@ export default class Details extends Vue{
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
   .details {
-    //width: 100%;
-    //height: 200px;
-    border: 1px solid red;
-    //margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: auto;
     .dayTotal {
       padding: 5px;
       background-color: #EEEEEE;
     }
-
     .dayDetail {
       > li {
         height: 72px;
@@ -77,42 +76,34 @@ export default class Details extends Vue{
         align-items: center;
         justify-content: space-between;
         background: #ffffff;
-
         > .detailContent {
           display: flex;
           flex-direction: column;
           margin-right: auto;
-
           > .tagValue {
             font-size: 18px;
             color: #333333;
           }
-
           > .otherValue {
             display: flex;
             flex-direction: row;
             color: #777777;
             font-size: 14px;
-            //margin-bottom: 5px;
             .notes {
               margin: 0 10px;
             }
           }
         }
-
         .price {
           font-size: 20px;
-          //border: 1px solid pink;
           margin-right: 15px;
           color: $color-base;
         }
       }
     }
-
     .icon {
       width: 40px;
       height: 40px;
-      //background-color: #C4C4C4;
       border-radius: 50%;
       margin: 0 10px;
       border: 1px solid $color-base;

@@ -7,7 +7,7 @@ import ElementUI from 'element-ui';
 import Icons from '@/components/Icons.vue';
 import Layout from '@/components/Layout.vue';
 
-import '@/assets/style/element-ui.scss'
+import '@/assets/style/element-ui.scss';
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false

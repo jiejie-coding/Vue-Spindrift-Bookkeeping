@@ -1,6 +1,6 @@
 <template>
   <div class="layout-wrapper">
-    <div class="content" :class="classPrefix && `${classPrefix}-content`">
+    <div class="content" :class="classPrefix && `${classPrefix}-layout`">
       <slot/>
     </div>
     <Nav/>
@@ -21,6 +21,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100%;
 }
 .content {
   flex-grow: 1;

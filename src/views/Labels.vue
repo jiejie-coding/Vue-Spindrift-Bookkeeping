@@ -74,7 +74,6 @@ export default class Labels extends Vue{
         height: 20px;
       }
     }
-
   }
   .add {
     position: fixed;
@@ -87,10 +86,10 @@ export default class Labels extends Vue{
     transform: translateX(-50%);
     border: none;
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .1);
-
     .icon {
       width: 32px;
       height: 32px;
+      margin: auto;
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="nav" :class="classPrefix && `${classPrefix}-content`">
+  <div class="nav" :class="classPrefix && `${classPrefix}-nav`">
     <slot name="left"></slot>
     <slot name="center"></slot>
     <slot name="right"></slot>

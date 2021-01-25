@@ -24,7 +24,6 @@ import ItemNav from '@/components/nav/ItemNav.vue';
 @Component({
   components:{ItemNav, Tags,Nav}
 })
-
 export default class NewTag extends Vue{
   value = '';
   selectTag = '';
@@ -40,7 +39,6 @@ export default class NewTag extends Vue{
 
 
 <style lang="scss" scoped>
-@import '~@/assets/style/helper.scss';
   .input {
     font-size: 16px;
     .input-text {
