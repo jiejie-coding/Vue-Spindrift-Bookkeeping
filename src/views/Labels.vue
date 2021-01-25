@@ -15,7 +15,7 @@
     </ul>
 
     <button class="add" @click="goNewTag">
-      <icons name="define"/>
+      <icons name="adds"/>
     </button>
   </div>
   </Layout>
@@ -36,7 +36,11 @@ export default class Labels extends Vue{
     this.$store.commit('fetchTags');
   }
   get tagList() {
-    return this.$store.state.tagList;
+    if(this.$store.state.selectedType === '-') {
+      return this.$store.state.tagList.filter(item => item.type === '-');
+    } else if(this.$store.state.selectedType === '+') {
+      return this.$store.state.tagList.filter(item => item.type === '+');
+    }
   }
   deleteTag(item: tagItem) {
     this.$store.commit('removeTag',item);

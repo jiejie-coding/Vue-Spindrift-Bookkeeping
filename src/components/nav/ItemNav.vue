@@ -18,11 +18,12 @@ export default class ItemNav extends Vue{
   @Prop() value!: string;
   @Prop() name!: string;
   showStr = '';
+  type = '';
   created() {
-    const types = this.$store.state.selectedType;
-    if(types === '+') {
+    this.type = this.$store.state.selectedType;
+    if(this.type === '+') {
       this.showStr = '收入';
-    } else {
+    } else if(this.type === '-') {
       this.showStr = '支出';
     }
   }
@@ -30,7 +31,7 @@ export default class ItemNav extends Vue{
     if(this.value === '') {
       alert("请输入标签名");
     } else {
-      const item = {name:this.name,value:this.value};
+      const item = {name:this.name,value:this.value,type:this.type};
       this.$store.commit('createTag',item);
     }
   }

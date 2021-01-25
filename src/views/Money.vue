@@ -16,7 +16,7 @@ import Tags from '@/components/Tags.vue';
 import Notes from '@/components/money/Notes.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
 import DatePicker from '@/components/money/DatePicker.vue';
-import {Component, Prop, Watch} from 'vue-property-decorator';
+import {Component} from 'vue-property-decorator';
 
 @Component({
   components: {NumberPad, Notes, Tags, Types, DatePicker},
@@ -26,13 +26,18 @@ export default class Money extends Vue{
     return this.$store.state.recordList;
   }
   get tagList() {
-    return this.$store.state.tagList;
+    if(this.$store.state.selectedType === '-') {
+      return this.$store.state.tagList.filter(item => item.type === '-');
+    } else if(this.$store.state.selectedType === '+') {
+      return this.$store.state.tagList.filter(item => item.type === '+');
+    }
   }
 
   created() {
     this.$store.commit('fetchTags');
     this.$store.commit('fetchRecords');
   }
+
   record: recordItem = {tags:{}, notes:'', amount: 0, types: '-',times: ''}
 
   onUpdateTags(value: object) {
