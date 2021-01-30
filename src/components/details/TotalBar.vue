@@ -1,6 +1,9 @@
 <template>
   <div class="total">
-    <Dropdown/>
+    <div class="Date">
+      <Dropdown :data-source="showYear"/>
+      <Dropdown :data-source="showMonth"/>
+    </div>
     <div class="Number NumberOut">
       <span>总支出</span>
       <span>-{{TotalOut}}￥</span>
@@ -18,30 +21,44 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Dropdown from '@/components/statistics/Dropdown.vue';
+import Dropdown from '@/components/details/Dropdown.vue';
 import {Component} from 'vue-property-decorator';
 
 @Component({
   components:{Dropdown}
 })
 export default class TotalBar extends Vue{
-  get TotalOut() {
-    const record = this.$store.state.recordList.filter(item => item.types === '-');
-    record.filter(item =>  item.times.split(' ')[0].split('-')[1] === this.$store.state.curMonth);
+  get showMonth() {
+    return this.$store.state.showMonth;
+  }
+  get showYear() {
+    return this.$store.state.showYear;
+  }
+  created() {
+    this.$store.commit('fetchYear');
+    this.$store.commit('fetchMonth');
+  }
+  InOrOutTotal(type:string) {
+    let record = this.$store.state.recordList.filter(item => item.types === type);
+    record = record.filter(item =>  {
+      return parseInt(item.times.split(' ')[0].split('-')[0]) === parseInt(this.$store.state.curYear)
+    });
+    record = record.filter(item =>  {
+      return parseInt(item.times.split(' ')[0].split('-')[1]) === parseInt(this.$store.state.curMonth)
+    });
     let sum = 0;
     for(const item of record) {
       sum += parseFloat(item.amount);
     }
     return sum;
   }
+  get TotalOut() {
+    let ans = this.InOrOutTotal('-');
+    return ans;
+  }
   get TotalIn() {
-    const record = this.$store.state.recordList.filter(item => item.types === '+');
-    record.filter(item =>  item.times.split(' ')[0].split('-')[1] === this.$store.state.curMonth);
-    let sum = 0;
-    for(const item of record) {
-      sum += parseFloat(item.amount);
-    }
-    return sum;
+    let ans = this.InOrOutTotal('+');
+    return ans;
   }
   get Total() {
     return this.TotalIn - this.TotalOut;
@@ -63,6 +80,12 @@ export default class TotalBar extends Vue{
   display: flex;
   align-items: center;
   text-align: center;
+  > .Date {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   > .Number {
     display: flex;
     flex-direction: column;
