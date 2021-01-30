@@ -3,7 +3,7 @@
     <div class="content" :class="classPrefix && `${classPrefix}-layout`">
       <slot/>
     </div>
-    <Nav/>
+    <Nav v-show="this.$store.state.hidden"/>
   </div>
 </template>
 

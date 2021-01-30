@@ -18,13 +18,33 @@
 import Vue from 'vue'
 import Tags from '@/components/Tags.vue';
 import Nav from '@/components/nav/Nav.vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Watch} from 'vue-property-decorator';
 import ItemNav from '@/components/nav/ItemNav.vue';
 
 @Component({
   components:{ItemNav, Tags,Nav}
 })
 export default class NewTag extends Vue{
+  docHeight = document.documentElement.clientHeight;  //默认屏幕高度
+  showHeight = document.documentElement.clientHeight;   //实时屏幕高度
+  mounted() {
+    // window.onresize监听页面高度的变化
+    window.onresize = ()=>{
+      return(()=>{
+        this.showHeight = document.documentElement.clientHeight;
+      })()
+    }
+  }
+
+  @Watch('showHeight')
+  onShowHeightChanged() {
+    if(this.showHeight >= this.docHeight){
+      this.$store.commit('changeHidden',true);
+    } else {
+      this.$store.commit('changeHidden',false);
+    }
+  }
+
   value = '';
   selectTag = '';
   get Tags() {

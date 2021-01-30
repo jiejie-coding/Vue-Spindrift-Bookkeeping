@@ -15,7 +15,7 @@
       <button>7</button>
       <button>8</button>
       <button>9</button>
-      <button class="ok" @click="ok">ok</button>
+      <button class="ok" @click="ok">保存</button>
       <button class="zero">0</button>
       <button>.</button>
     </div>

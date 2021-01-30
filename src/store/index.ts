@@ -44,7 +44,8 @@ const store = new Vuex.Store({
     showDays: [] as number[],
     curMonth: '',
     curYear: '',
-    record: [] as recordItem[]
+    record: [] as recordItem[],
+    hidden: true,
   },
   mutations: {
     changeSelectType(state, types: string) {
@@ -95,7 +96,7 @@ const store = new Vuex.Store({
     fetchYear(state) {
       const curYear = parseInt(new Date().getFullYear().toString());
       state.showYear = [];
-      for (let i = 2018; i <= curYear; i++) {
+      for (let i = curYear-4; i <= curYear; i++) {
         state.showYear.push(i.toString());
       }
       state.curYear = curYear.toString();
@@ -128,6 +129,10 @@ const store = new Vuex.Store({
       state.record = state.record.filter(item =>  {
         return parseInt(item.times.split(' ')[0].split('-')[1]) === parseInt(state.curMonth)
       });
+    },
+
+    changeHidden(state,flag:boolean) {
+      state.hidden = flag;
     }
   }
 });

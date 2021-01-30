@@ -3,9 +3,8 @@
     <Types/>
     <Tags :data-source="tagList" @update:value='onUpdateTags' :addNewTag="true"/>
     <Notes @update:value="onUpdateNotes"><DatePicker @update:value='onUpdateTimes'/></Notes>
-    <NumberPad :value.sync="record.amount"  @submit="saveRecord"/>
+    <NumberPad :value.sync="record.amount"  @submit="saveRecord" v-show="hidden"/>
   </Layout>
-
 </template>
 
 <script lang="ts">
@@ -15,12 +14,37 @@ import Tags from '@/components/Tags.vue';
 import Notes from '@/components/money/Notes.vue';
 import NumberPad from '@/components/money/NumberPad.vue';
 import DatePicker from '@/components/money/DatePicker.vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Watch} from 'vue-property-decorator';
 
 @Component({
   components: {NumberPad, Notes, Tags, Types, DatePicker},
 })
+
 export default class Money extends Vue{
+  docHeight = document.documentElement.clientHeight;  //默认屏幕高度
+  showHeight = document.documentElement.clientHeight;   //实时屏幕高度
+  hidden = true;
+  mounted() {
+    // window.onresize监听页面高度的变化
+    window.onresize = ()=>{
+      return(()=>{
+        this.showHeight = document.documentElement.clientHeight;
+      })()
+    }
+  }
+
+  @Watch('showHeight')
+  onShowHeightChanged() {
+    if(this.showHeight >= this.docHeight){
+      this.hidden=true;
+      this.$store.commit('changeHidden',true);
+    } else {
+      this.hidden=false;
+      this.$store.commit('changeHidden',false);
+    }
+  }
+
+
   get recordList() {
     return this.$store.state.recordList;
   }
