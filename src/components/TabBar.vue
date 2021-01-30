@@ -1,9 +1,10 @@
 <template>
   <nav>
-    <router-link to="/labels" class="item">
+    <router-link to="/details" class="item">
       <Icons name="labels"/>
-      标签
+      明细
     </router-link>
+
     <router-link to="/money" class="item">
       <Icons name="money"/>
       记账
@@ -12,6 +13,7 @@
       <Icons name="statistics"/>
       统计
     </router-link>
+
   </nav>
 </template>
 

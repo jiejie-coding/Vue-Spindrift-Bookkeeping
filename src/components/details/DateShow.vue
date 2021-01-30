@@ -1,20 +1,28 @@
 <template>
-  <div class="details">
-  <div class="details"  v-for="(value,key) in recordList">
-    <div class="dayTotal">{{key}}</div>
-    <ul class="dayDetail">
-      <li v-for="item in value">
-        <Icons :name="item.tags.name"/>
-        <div class="detailContent">
-          <div class="tagValue">{{item.tags.value}}</div>
-          <div class="otherValue">
-            <div class="honers">{{item.times.split(' ')[1]}}</div>
-            <div class="notes">{{item.notes}}</div>
+  <div  class="details">
+  <div v-if="JSON.stringify(recordList) !== '{}'">
+    <div v-for="(value,key) in recordList" :key="key">
+      <div class="dayTotal">
+        <span>{{key}}</span>
+        <span>总计：{{dayTotal(value)}}</span>
+      </div>
+      <ul class="dayDetail">
+        <li v-for="item in value" :key="item.tag">
+          <Icons :name="item.tags.name"/>
+          <div class="detailContent">
+            <div class="tagValue">{{item.tags.value}}</div>
+            <div class="otherValue">
+              <div class="honers">{{item.times.split(' ')[1]}}</div>
+              <div class="notes">{{item.notes}}</div>
+            </div>
           </div>
-        </div>
-        <div class="price">{{item.types}}{{item.amount}}￥</div>
-      </li>
-    </ul>
+          <div class="price">{{item.types}}{{item.amount}}￥</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="no-content" v-else>
+    <Icons name="no-content"/>
   </div>
   </div>
 </template>
@@ -25,26 +33,25 @@ import {Component} from 'vue-property-decorator';
 
 @Component
 export default class Details extends Vue{
-  get recordList() {
-    let record = [] as recordItem[];
-    const type = this.$store.state.selectedType;
-    if(type === '-') {
-      record = this.$store.state.recordList.filter(item => item.types === '-');
-    } else if(type === '+') {
-      record = this.$store.state.recordList.filter(item => item.types === '+');
+  dayTotal(value:recordItem[]) {
+    let ans = 0;
+    for(let i = 0; i <  value.length; i++) {
+      ans += parseFloat(value[i].amount.toString());
     }
+    return ans;
+  }
+  get recordList() {
     const map: {[key: string]: recordItem[]} = {};
-    record.filter(item =>  item.times.split(' ')[0].split('-')[1] === this.$store.state.curMonth);
-    for(const item of record) {
+
+    this.$store.commit('fetchRecord');
+    // console.log(123, this.$store.state.record);
+    for(const item of this.$store.state.record) {
       const date = item.times.split(' ')[0];
       map[date] = map[date] || [];
       map[date].push(item);
     }
     const newMap = {};
-    function dateSort(a,b) {
-      return a.times - b.times;
-    }
-    Object.keys(map).sort(dateSort).forEach(function(key) {
+    Object.keys(map).sort().reverse().forEach(function(key) {
       newMap[key] = map[key];
     });
     return newMap;
@@ -64,6 +71,8 @@ export default class Details extends Vue{
     flex-grow: 1;
     overflow: auto;
     .dayTotal {
+      display: flex;
+      justify-content: space-between;
       padding: 5px;
       background-color: #EEEEEE;
     }
@@ -109,6 +118,14 @@ export default class Details extends Vue{
       border: 1px solid $color-base;
       padding: 5px;
       border-radius: 50%;
+    }
+  }
+  .no-content {
+    > .icon {
+      display: block;
+      width: 250px;
+      height: 250px;
+      margin: auto;
     }
   }
 </style>

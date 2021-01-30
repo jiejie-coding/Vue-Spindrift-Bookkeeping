@@ -12,22 +12,30 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Dropdown extends Vue {
   selectedDate: string = '';
-  get dataSource() {
-    return this.$store.state.showMonth;
+  @Prop() dataSource!: string[];
+  judge() {
+    const pattern = new RegExp("[\u4E00-\u9FA5]+");
+    if (pattern.test(this.selectedDate)) {
+      this.$store.commit('setMonth',this.selectedDate)
+    }
+    else {
+      this.$store.commit('setYear',this.selectedDate);
+    }
   }
   created() {
-    this.$store.commit('fetchRecords');
-    this.$store.commit('fetchMonth');
-    this.selectedDate = this.$store.state.showMonth[0];
-    this.$store.commit('setMonth',this.selectedDate)
+    if(this.dataSource) {
+      this.selectedDate = this.dataSource[this.dataSource.length-1];
+      this.judge();
+    }
   }
   changed(item: any) {
     this.selectedDate = item;
+    this.judge();
   }
 }
 </script>

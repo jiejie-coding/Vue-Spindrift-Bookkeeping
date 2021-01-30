@@ -2,10 +2,11 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 
 const Money = () => import('@/views/Money.vue');
-const Statistics = () => import('@/views/Statistics.vue');
+const Details = () => import('@/views/Details.vue');
 const Labels = () => import('@/views/Labels.vue');
 const NotFound = () => import('@/views/NotFound.vue');
 const NewTag = () => import('@/views/NewTag.vue');
+const Statistics = () => import('@/views/Statistics.vue');
 
 Vue.use(VueRouter)
 
@@ -19,8 +20,8 @@ const routes: Array<RouteConfig> = [
     component: Money
   },
   {
-    path: '/statistics',
-    component: Statistics
+    path: '/Details',
+    component: Details
   },
   {
     path: '/labels',
@@ -29,6 +30,10 @@ const routes: Array<RouteConfig> = [
   {
     path: '/labels/newTag',
     component: NewTag
+  },
+  {
+    path: '/statistics',
+    component: Statistics
   },
   {
     path: '*',
