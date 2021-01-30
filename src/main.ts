@@ -7,10 +7,15 @@ import ElementUI from 'element-ui';
 import Icons from '@/components/Icons.vue';
 import Layout from '@/components/Layout.vue';
 
-import '@/assets/style/element-ui.scss';
-
-Vue.use(ElementUI);
 Vue.config.productionTip = false
+
+import '@/assets/style/element-ui.scss';
+Vue.use(ElementUI);
+import 'default-passive-events'
+
+// import ECharts from 'vue-echarts/components/ECharts.vue'
+// Vue.component('chart', ECharts)
+
 
 Vue.component('Icons',Icons)
 Vue.component('Layout',Layout);

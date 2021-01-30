@@ -39,8 +39,12 @@ const store = new Vuex.Store({
     tagList: [] as tagItem[],
     selectedType: '-',
     newTag: newTags,
+    showYear: [] as string[],
     showMonth: [] as string[],
+    showDays: [] as number[],
     curMonth: '',
+    curYear: '',
+    record: [] as recordItem[]
   },
   mutations: {
     changeSelectType(state, types: string) {
@@ -88,17 +92,43 @@ const store = new Vuex.Store({
     saveTags(state) {
       window.localStorage.setItem('tagList', JSON.stringify(state.tagList));
     },
-
+    fetchYear(state) {
+      const curYear = parseInt(new Date().getFullYear().toString());
+      state.showYear = [];
+      for (let i = 2018; i <= curYear; i++) {
+        state.showYear.push(i.toString());
+      }
+      state.curYear = curYear.toString();
+    },
     fetchMonth(state) {
-      const curMonth = parseInt(new Date().getMonth().toString()) + 1;
+      let curMonth = 12;
+      if(state.curYear === new Date().getFullYear().toString()) {
+        curMonth = parseInt(new Date().getMonth().toString()) + 1;
+      }
       state.showMonth = [];
       for (let i = 1; i <= curMonth; i++) {
         state.showMonth.push(i + ' 月 ');
       }
     },
+
     setMonth(state, month: string) {
       state.curMonth = month;
     },
+    setYear(state, year: string) {
+      state.curYear = year;
+      store.commit('fetchMonth');
+    },
+
+    fetchRecord(state,type:string) {
+      if(!type) type = state.selectedType;
+      state.record = state.recordList.filter(item => item.types === type);
+      state.record = state.record.filter(item =>  {
+        return parseInt(item.times.split(' ')[0].split('-')[0]) === parseInt(state.curYear)
+      });
+      state.record = state.record.filter(item =>  {
+        return parseInt(item.times.split(' ')[0].split('-')[1]) === parseInt(state.curMonth)
+      });
+    }
   }
 });
 
