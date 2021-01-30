@@ -109,16 +109,17 @@ export default class Details extends Vue{
           color: $color-base;
         }
       }
+      .icon {
+         width: 40px;
+         height: 40px;
+         border-radius: 50%;
+         margin: 0 10px;
+         border: 1px solid $color-base;
+         padding: 5px;
+         border-radius: 50%;
+       }
     }
-    .icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin: 0 10px;
-      border: 1px solid $color-base;
-      padding: 5px;
-      border-radius: 50%;
-    }
+
   }
   .no-content {
     > .icon {
