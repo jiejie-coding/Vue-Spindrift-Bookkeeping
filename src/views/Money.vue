@@ -49,11 +49,7 @@ export default class Money extends Vue{
     return this.$store.state.recordList;
   }
   get tagList() {
-    if(this.$store.state.selectedType === '-') {
-      return this.$store.state.tagList.filter(item => item.type === '-');
-    } else if(this.$store.state.selectedType === '+') {
-      return this.$store.state.tagList.filter(item => item.type === '+');
-    }
+    return this.$store.getters.tagList;
   }
 
   created() {

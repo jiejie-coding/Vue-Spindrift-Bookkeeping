@@ -47,6 +47,15 @@ const store = new Vuex.Store({
     record: [] as recordItem[],
     hidden: true,
   },
+  getters: {
+    tagList(state) {
+      if(state.selectedType === '-') {
+        return state.tagList.filter(item => item.type === '-');
+      } else if(state.selectedType === '+') {
+        return state.tagList.filter(item => item.type === '+');
+      }
+    }
+  },
   mutations: {
     changeSelectType(state, types: string) {
       state.selectedType = types;

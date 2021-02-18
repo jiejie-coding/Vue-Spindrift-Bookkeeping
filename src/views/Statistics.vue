@@ -1,6 +1,5 @@
 <template>
   <layout class-prefix="details">
-
       <Types/>
     <div class="wrapper">
       <div class="dropdown">

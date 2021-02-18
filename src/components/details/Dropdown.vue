@@ -5,7 +5,7 @@
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item v-for="item in dataSource" :command="item">{{ item }}</el-dropdown-item>
+        <el-dropdown-item v-for="item in dataSource" :command="item" >{{ item }}</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
 </template>

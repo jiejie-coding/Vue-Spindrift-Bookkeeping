@@ -36,11 +36,7 @@ export default class Labels extends Vue{
     this.$store.commit('fetchTags');
   }
   get tagList() {
-    if(this.$store.state.selectedType === '-') {
-      return this.$store.state.tagList.filter(item => item.type === '-');
-    } else if(this.$store.state.selectedType === '+') {
-      return this.$store.state.tagList.filter(item => item.type === '+');
-    }
+    return this.$store.getters.tagList;
   }
   deleteTag(item: tagItem) {
     this.$store.commit('removeTag',item);
