@@ -92,9 +92,9 @@ export default class TotalBar extends Vue{
     flex: 2;
   }
   > .NumberTotal {
-    > :nth-child(1) {
-      //color: red;
-    }
+    // > :nth-child(1) {
+    //   color: red;
+    // }
     > :nth-child(2) {
       font-size: 18px;
       color: $color-base;
