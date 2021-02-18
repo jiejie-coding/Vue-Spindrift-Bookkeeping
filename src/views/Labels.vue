@@ -3,7 +3,7 @@
   <div class="labels">
     <LabelNav/>
     <ul class="tags">
-      <li v-for="tag in tagList">
+      <li v-for="tag in tagList" :key="tag.name">
         <span>
           <Icons :name="tag.name"/>
           {{tag.value}}
