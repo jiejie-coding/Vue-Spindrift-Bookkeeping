@@ -43,9 +43,9 @@ export default class Details extends Vue{
   get recordList() {
     const map: {[key: string]: recordItem[]} = {};
 
-    this.$store.commit('fetchRecord');
+    this.$store.commit('fetchOneMonthRecord');
     // console.log(123, this.$store.state.record);
-    for(const item of this.$store.state.record) {
+    for(const item of this.$store.state.oneMonthRecord) {
       const date = item.times.split(' ')[0];
       map[date] = map[date] || [];
       map[date].push(item);

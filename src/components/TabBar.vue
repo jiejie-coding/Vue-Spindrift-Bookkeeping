@@ -4,7 +4,6 @@
       <Icons name="labels"/>
       明细
     </router-link>
-
     <router-link to="/money" class="item">
       <Icons name="money"/>
       记账

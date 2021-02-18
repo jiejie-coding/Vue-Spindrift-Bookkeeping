@@ -18,7 +18,7 @@ export default class DatePie extends Vue {
   get newMap() {
     const map: {[key: string]: number} = {};
 
-    for(const item of this.$store.state.record) {
+    for(const item of this.$store.state.oneMonthRecord) {
       const date = item.tags.value;
       map[date] = map[date] || 0;
       map[date] += parseFloat(item.amount.toString());

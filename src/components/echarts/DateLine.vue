@@ -16,8 +16,8 @@ export default class DateLine extends Vue {
   }
   get DateLineOptions() {
     const map: {[key: string]: recordItem[]} = {};
-    this.$store.commit('fetchRecord');
-    for(const item of this.$store.state.record) {
+    this.$store.commit('fetchOneMonthRecord');
+    for(const item of this.$store.state.oneMonthRecord) {
       const date = item.times.split(' ')[0];
       map[date] = map[date] || [];
       map[date].push(item);

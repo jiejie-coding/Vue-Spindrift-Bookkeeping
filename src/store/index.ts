@@ -44,7 +44,7 @@ const store = new Vuex.Store({
     showDays: [] as number[],
     curMonth: '',
     curYear: '',
-    record: [] as recordItem[],
+    oneMonthRecord: [] as recordItem[],
     hidden: true,
   },
   getters: {
@@ -129,13 +129,13 @@ const store = new Vuex.Store({
       store.commit('fetchMonth');
     },
 
-    fetchRecord(state,type:string) {
+    fetchOneMonthRecord(state,type:string) {
       if(!type) type = state.selectedType;
-      state.record = state.recordList.filter(item => item.types === type);
-      state.record = state.record.filter(item =>  {
+      state.oneMonthRecord = state.recordList.filter(item => item.types === type);
+      state.oneMonthRecord = state.oneMonthRecord.filter(item =>  {
         return parseInt(item.times.split(' ')[0].split('-')[0]) === parseInt(state.curYear)
       });
-      state.record = state.record.filter(item =>  {
+      state.oneMonthRecord = state.oneMonthRecord.filter(item =>  {
         return parseInt(item.times.split(' ')[0].split('-')[1]) === parseInt(state.curMonth)
       });
     },
