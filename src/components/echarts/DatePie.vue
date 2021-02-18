@@ -39,13 +39,14 @@ export default class DatePie extends Vue {
     return {
       title: {
         text: '分类消费总览',
-        x: 'center'
+        x: 10,
+        y:0
       },
       grid: {
-        left: 0,
-        right: 0,
-        top: 10,
-        bottom: -10
+        left: 100,
+        right: 100,
+        top: 100,
+        bottom: 100
       },
       tooltip: {
         trigger: 'item',
@@ -61,13 +62,14 @@ export default class DatePie extends Vue {
           center: ['50%', '50%'],
 
           label: {
+            length: 8,
             show: true,
             position: 'outside',
             color:'#333'
           },
           labelLine: {
-            length: 5,
-            length2: 5,
+            length: 20,
+            length2: 10,
           },
           color: ['#37A2DA', '#32C5E9', '#67E0E3', '#9FE6B8', '#FFDB5C','#ff9f7f', '#fb7293', '#E062AE', '#E690D1', '#e7bcf3', '#9d96f5', '#8378EA', '#96BFFF'],
           data: this.newMap===[]?[{name:'11',value:'100%'}]:this.newMap,

@@ -17,7 +17,6 @@ export default class Types extends Vue {
 
   selectType(type: string) {
     this.$store.commit('changeSelectType',type);
-    this.$store.commit('fetchTags');
   }
 }
 </script>

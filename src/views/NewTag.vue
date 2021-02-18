@@ -30,9 +30,7 @@ export default class NewTag extends Vue{
   mounted() {
     // window.onresize监听页面高度的变化
     window.onresize = ()=>{
-      return(()=>{
         this.showHeight = document.documentElement.clientHeight;
-      })()
     }
   }
 

@@ -42,7 +42,7 @@ export default class DateLine extends Vue {
     return {
       title: {
         text: '月消费总览',
-        x: 'center'
+        x: 10
       },
       grid: {
         left: 0,
