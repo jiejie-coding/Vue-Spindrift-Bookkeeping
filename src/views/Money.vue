@@ -69,6 +69,7 @@ export default class Money extends Vue{
   saveRecord(){
     this.record.types = this.$store.state.selectedType;
     this.$store.commit('createRecord', this.record);
+    alert('保存成功');
   }
 
 }

@@ -5,7 +5,7 @@
       <div class="input">
         <div class="input-text">
           <span>名称：</span>
-          <input type="text" placeholder="4个字以内" v-model="value"/>
+          <input type="text" placeholder="4个字以内" v-model="value" @update:value="onUpdateInputContent"/>
         </div>
         <div class="input-icon">选择图标</div>
       </div>
@@ -18,7 +18,7 @@
 import Vue from 'vue'
 import Tags from '@/components/Tags.vue';
 import Nav from '@/components/nav/Nav.vue';
-import {Component, Watch} from 'vue-property-decorator';
+import {Component, Prop, Watch} from 'vue-property-decorator';
 import ItemNav from '@/components/nav/ItemNav.vue';
 
 @Component({
@@ -45,11 +45,16 @@ export default class NewTag extends Vue{
 
   value = '';
   selectTag = '';
+  inputContent = '';
+
   get Tags() {
     return this.$store.state.newTag;
   }
   onUpdateTags(value: tagItem) {
       this.selectTag = value.name;
+  }
+  onUpdateInputContent(content: string) {
+    this.inputContent = content;
   }
 
 }

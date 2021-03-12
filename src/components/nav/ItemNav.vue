@@ -33,6 +33,7 @@ export default class ItemNav extends Vue{
     } else {
       const item = {name:this.name,value:this.value,type:this.type};
       this.$store.commit('createTag',item);
+      this.$emit('update:value','');
     }
   }
   goBack() {
